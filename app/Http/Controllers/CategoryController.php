@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.category.category');
+        $categories = Category::all();
+        return view('admin.category.category' , compact('categories'));
     }
 
     /**
@@ -27,7 +29,17 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Step 1: Validate the incoming request data
+        $request->validate([
+            'category_name' => 'required|string|max:255',
+        ]);
+        // Step 2: Create a new product using the validated data
+        Category::create([
+            'name' => $request->category_name,
+        ]);
+
+        // Step 3: Redirect to another page (like the index page) with a success message
+        return redirect()->route('category')->with('success', 'Product created successfully!');
     }
 
     /**
@@ -41,9 +53,10 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        $category = Category::findOrFail($request->id); // Fetch the category by its ID
+        return view('admin.category.update_category', compact('category'));
     }
 
     /**
