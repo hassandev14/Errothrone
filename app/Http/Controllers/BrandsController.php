@@ -11,7 +11,7 @@ class BrandsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.brand.brand');
     }
 
     /**
@@ -19,7 +19,7 @@ class BrandsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brand.add_brand');
     }
 
     /**
@@ -41,9 +41,9 @@ class BrandsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        return view('admin.brand.update_brand');
     }
 
     /**
