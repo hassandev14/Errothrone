@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-            $table->string('username');
-            $table->string('email')->unique();  // Ensures email is unique
-            $table->string('password');
-            $table->enum('role', ['admin', 'super_admin'])->default('admin');  // Add role column with default value
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('orders');
     }
 };
