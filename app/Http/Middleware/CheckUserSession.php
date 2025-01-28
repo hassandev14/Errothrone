@@ -15,11 +15,11 @@ class CheckUserSession
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!session('username')) {
+        if (!session('email')) {
             // If no session, redirect to login page
             return redirect()->route('login')->with('message', 'Please log in first.');
         }
-        
+
         return $next($request);
     }
 }

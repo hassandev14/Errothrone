@@ -11,11 +11,11 @@ use  App\Models\User;
 class userController extends Controller
 {
     public function login_view(){
-        return view('login');
+        return view('lauout.login');
     }
 
     public function Signup_view(){
-        return view('signup');
+        return view('lauout.signup');
     }
     public function signup(Request $request)
     {
@@ -43,7 +43,8 @@ class userController extends Controller
     
         // Check if the user exists and the hashed password matches
         if ($user && Hash::check($password, $user->password)) {
-            session(['username' => $user->name]);  // Store the username (or any other data)
+
+            session(['email' => $user->email]);  // Store the username (or any other data)
 
             // Optionally store more user info in session
              session(['user_id' => $user->id]);
