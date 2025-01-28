@@ -3,8 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\userController;
+use App\Http\Middleware\CheckUserSession;
 
+Route::middleware(CheckUserSession::class)->group(function () {
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+});
+
 Route::get('/signup', [userController::class, 'signup_view']);
 Route::get('/login', [userController::class, 'login_view'])->name('login');
 
