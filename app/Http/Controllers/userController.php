@@ -11,11 +11,11 @@ use  App\Models\User;
 class userController extends Controller
 {
     public function login_view(){
-        return view('layout.login');
+        return view('admin.login');
     }
 
     public function Signup_view(){
-        return view('layout.signup');
+        return view('admin.signup');
     }
     public function signup(Request $request)
     {
