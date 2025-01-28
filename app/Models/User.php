@@ -13,7 +13,7 @@ class User extends Model
 {
     use HasFactory, Notifiable; 
 
-    protected $table = 'user';  
+    protected $table = 'users';  
 
     protected $fillable = [
         'name',
