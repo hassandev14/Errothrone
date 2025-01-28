@@ -11,11 +11,11 @@ use  App\Models\User;
 class userController extends Controller
 {
     public function login_view(){
-        return view('lauout.login');
+        return view('layout.login');
     }
 
     public function Signup_view(){
-        return view('lauout.signup');
+        return view('layout.signup');
     }
     public function signup(Request $request)
     {
@@ -30,7 +30,7 @@ class userController extends Controller
          $user->save();
 
         // Return a response
-        return redirect()->route('/login')->with('message', 'User registered successfully! Please login.');
+        return redirect()->route('login')->with('message', 'User registered successfully! Please login.');
     }
     public function login(Request $request)
     {
@@ -59,7 +59,7 @@ class userController extends Controller
     public function logout()
     {
         // Remove specific session data
-        session()->forget('username');
+        session()->forget('email');
         session()->forget('user_id');
 
         // Optionally, clear all session data
