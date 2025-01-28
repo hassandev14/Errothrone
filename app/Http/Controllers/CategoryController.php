@@ -55,8 +55,12 @@ class CategoryController extends Controller
      */
     public function edit(Request $request)
     {
+<<<<<<< HEAD:app/Http/Controllers/CategoryController.php
         $category = Category::findOrFail($request->id); // Fetch the category by its ID
         return view('admin.category.update_category', compact('category'));
+=======
+        return view('admin.category.update_category');
+>>>>>>> ee6f145e2e2808243ef388912a3d0b1781e4ff08:app/Http/Controllers/CategoriesController.php
     }
 
     /**
