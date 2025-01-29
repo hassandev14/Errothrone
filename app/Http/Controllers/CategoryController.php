@@ -7,75 +7,50 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
+    // List all categories
+    public function index() {
         $categories = Category::all();
-        return view('admin.category.category' , compact('categories'));
+        return view('admin.category.category', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
+    // Show add category form
+    public function create() {
         return view('admin.category.add_category');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        // Step 1: Validate the incoming request data
-        $request->validate([
-            'category_name' => 'required|string|max:255',
-        ]);
-        // Step 2: Create a new product using the validated data
-        Category::create([
-            'name' => $request->category_name,
-        ]);
-
-        // Step 3: Redirect to another page (like the index page) with a success message
-        return redirect()->route('category')->with('success', 'Product created successfully!');
+    // Store new category
+    public function store(Request $request) {
+        $request->validate(['name' => 'required|string|max:255']);
+        Category::create(['name' => $request->name]);
+        return redirect()->route('categories.index')->with('success', 'Category added successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Request $request)
-    {
-<<<<<<< HEAD:app/Http/Controllers/CategoryController.php
-        $category = Category::findOrFail($request->id); // Fetch the category by its ID
+    // Show edit form
+    public function edit($id) {
+        $category = Category::find($id);
+        if (!$category) {
+            return redirect()->route('categories.index')->with('error', 'Category not found!');
+        }
         return view('admin.category.update_category', compact('category'));
-=======
-        return view('admin.category.update_category');
->>>>>>> ee6f145e2e2808243ef388912a3d0b1781e4ff08:app/Http/Controllers/CategoriesController.php
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+    // Update category
+    public function update(Request $request, $id) {
+        $category = Category::find($id);
+        if (!$category) {
+            return redirect()->route('categories.index')->with('error', 'Category not found!');
+        }
+        $category->update(['name' => $request->name]);
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    // Delete category
+    public function destroy($id) {
+        $category = Category::find($id);
+        if (!$category) {
+            return redirect()->route('categories.index')->with('error', 'Category not found!');
+        }
+        $category->delete();
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully!');
     }
 }
