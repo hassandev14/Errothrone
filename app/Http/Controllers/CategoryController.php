@@ -10,12 +10,12 @@ class CategoryController extends Controller
     // List all categories
     public function index() {
         $categories = Category::all();
-        return view('admin.category.category', compact('categories'));
+        return view('admin.category.category', compact('categories'),['title'=>'Category']);
     }
 
     // Show add category form
     public function create() {
-        return view('admin.category.add_category');
+        return view('admin.category.add_category',['title'=>'Add Category']);
     }
 
     // Store new category
@@ -31,7 +31,7 @@ class CategoryController extends Controller
         if (!$category) {
             return redirect()->route('categories.index')->with('error', 'Category not found!');
         }
-        return view('admin.category.update_category', compact('category'));
+        return view('admin.category.update_category', compact('category'),['title'=>'Edit Category']);
     }
 
     // Update category

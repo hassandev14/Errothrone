@@ -13,7 +13,6 @@ Route::middleware(CheckUserSession::class)->group(function () {
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 //  CATEGORY ROUTES
-
 // List Categories
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
@@ -31,6 +30,25 @@ Route::put('/categories/{id}/update', [CategoryController::class, 'update'])->na
 
 // Delete Category
 Route::get('/categories/{id}/delete', [CategoryController::class, 'destroy'])->name('categories.delete');
+
+// Show all brands
+Route::get('/brand', [BrandsController::class, 'index'])->name('brands.index');
+
+// Show Add Brand Form
+Route::get('/brand/create', [BrandsController::class, 'create'])->name('brands.create');
+
+// Store Brand
+Route::post('/brand/store', [BrandsController::class, 'store'])->name('brands.store');
+
+// Show Edit Brand Form
+Route::get('/brand/{id}/edit', [BrandsController::class, 'edit'])->name('brands.edit');
+
+// Update Brand
+Route::put('/brand/{id}', [BrandsController::class, 'update'])->name('brands.update');
+
+// Delete Brand (Using DELETE instead of GET)
+Route::get('/brand/{id}', [BrandsController::class, 'destroy'])->name('brands.destroy');
+
 
 });
 
