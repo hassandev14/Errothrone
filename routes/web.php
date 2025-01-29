@@ -47,7 +47,7 @@ Route::get('/brand/{id}/edit', [BrandsController::class, 'edit'])->name('brands.
 Route::put('/brand/{id}', [BrandsController::class, 'update'])->name('brands.update');
 
 // Delete Brand (Using DELETE instead of GET)
-Route::get('/brand/{id}', [BrandsController::class, 'destroy'])->name('brands.destroy');
+Route::get('/brand/{id}', [BrandsController::class, 'destroy'])->name('brands.delete');
 
 
 });
