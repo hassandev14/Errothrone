@@ -1,13 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\CheckUserSession;
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\Order_itemsController;
 
+
+
+
+Route::get('/clear', function () {
+    Artisan::call('cache:clear');      // Clear application cache
+    Artisan::call('route:clear');      // Clear route cache
+    Artisan::call('config:clear');     // Clear config cache
+    Artisan::call('view:clear');       // Clear view cache
+    Artisan::call('optimize:clear');   // Clear optimization cache
+    return redirect()->back()->with('status', 'Cache cleared successfully!');
+});
 // Unauthenticated Routes
 // These routes are for users who are not logged in or do not have a valid session.
 // They provide access to the signup, login, and logout functionality.
@@ -80,4 +94,18 @@ Route::put('/product/{id}', [ProductsController::class, 'update'])->name('produc
 
 // Delete product 
 Route::get('/product/{id}', [ProductsController::class, 'destroy'])->name('products.delete');
+
+/////////////////////////////////////////////////  ORDERS ROUTES   //////////////////////////////////////////////////////////
+// Show all Order
+Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
+
+// Delete Order 
+Route::get('/orders/{id}', [OrdersController::class, 'destroy'])->name('orders.delete');
+
+/////////////////////////////////////////////////  ORDERS ITEM ROUTES   //////////////////////////////////////////////////////////
+// Show all Orders ITEM 
+Route::get('/order_items', [Order_itemsController::class, 'index'])->name('orders_item.index');
+
+// Delete Orders ITEM 
+Route::get('/orders_items/{id}', [Order_itemsController::class, 'destroy'])->name('orders_item.delete');
 });

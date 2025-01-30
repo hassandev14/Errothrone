@@ -9,12 +9,12 @@
             <ul class="list-unstyled navbar__list">
                 <li class="active has-sub">
                     <a class="js-arrow" href="/">
-                        <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                        <i class="fas fa-chart-line"></i>Dashboard</a>
                 </li>
                 <!-- CATEGORY LINKS -->
                 <li class="active has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fa fa-shopping-cart"></i>Category</a>
+                        <i class="fas fa-th-list"></i>Category</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
                             <a href="{{ route('categories.index') }}">Category List</a>
@@ -27,7 +27,7 @@
                 <!-- BRANDS LINKS -->
                 <li class="active has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fa fa-shopping-cart"></i>Brand</a>
+                        <i class="fas fa-cogs"></i>Brand</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
                             <a href="{{ route('brands.index') }}">Brand List</a>
@@ -40,13 +40,26 @@
                 <!-- PRODUCT LINKS -->
                 <li class="active has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fa fa-shopping-cart"></i>Product</a>
+                        <i class="fas fa-box"></i>Product</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
                             <a href="{{ route('products.index') }}">Product List</a>
                         </li>
                         <li>
                             <a href="{{ route('products.create') }}">Add Product</a>
+                        </li>
+                    </ul>
+                </li>
+                 <!-- ORDER LINKS -->
+                 <li class="active has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa fa-bullhorn"></i>Order</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="{{ route('orders.index') }}">Order List</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('orders_item.index') }}">Order Item List</a>
                         </li>
                     </ul>
                 </li>
