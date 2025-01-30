@@ -4,22 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Product extends Model
 {
     protected $fillable = [
         'name',
         'category_id',
-        'desc',
+        'brand_id',
+        'description',
+        'price',
         'image_name',
     
     ];
-    // Brand.php
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');  // The second argument is the foreign key
     }
-    public function products()
+    public function brand()
     {
-        return $this->hasMany(Product::class); // A brand has many products
+        return $this->belongsTo(Brand::class); // Brand model will be related via brand_id 
     }
 }

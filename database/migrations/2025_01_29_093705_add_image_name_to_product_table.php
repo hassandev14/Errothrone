@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('brands', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->string('image_name')->nullable(); // Add image_name column
-            $table->text('desc')->nullable(); // Add description column (nullable)
         });
     }
 
@@ -22,9 +21,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('brands', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('image_name');
-            $table->dropColumn('desc');
         });
     }
 };

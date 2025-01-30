@@ -37,6 +37,19 @@
                         </li>
                     </ul>
                 </li>
+                <!-- PRODUCT LINKS -->
+                <li class="active has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa fa-shopping-cart"></i>Product</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="{{ route('products.index') }}">Product List</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('products.create') }}">Add Product</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>
