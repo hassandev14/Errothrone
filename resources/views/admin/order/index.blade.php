@@ -15,7 +15,7 @@
                 <?php foreach ($orders as $order) { ?>
                     <tr>
                         <td>{{ $order->id }}</td>
-                        <td>{{ $order->user->username }}</td>
+                        <td>{{ $order->customer->first_name }}</td>
                         <td>
                             @if($order->status == 'Completed')
                             <span style="color: green; font-weight: bold;">&#x25CF;</span> {{ $order->status }}

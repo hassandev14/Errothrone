@@ -48,6 +48,9 @@
                         <li>
                             <a href="{{ route('products.create') }}">Add Product</a>
                         </li>
+                        <li>
+                            <a href="{{ route('stocks.index') }}">Add Stock</a>
+                        </li>
                     </ul>
                 </li>
                  <!-- ORDER LINKS -->
@@ -60,6 +63,29 @@
                         </li>
                         <li>
                             <a href="{{ route('orders_item.index') }}">Order Item List</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('order_returns.index') }}">Order Return</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- CART LINKS -->
+                <li class="active has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-shopping-cart"></i>Cart</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="{{ route('carts.index') }}">Cart List</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- PAYMENT LINKS -->
+                <li class="active has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-credit-card"></i>Payment</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="{{ route('payments.index') }}">Payment List</a>
                         </li>
                     </ul>
                 </li>

@@ -32,6 +32,19 @@
 
     <!-- Main CSS-->
     <link href="{{ asset('css/theme.css') }}" rel="stylesheet" media="all">
+    
+    <!-- theme 2 -->
+    <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/animation.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <!-- Font -->
+    <link rel="stylesheet" href="{{ asset('font/fonts.css') }}">
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="{{ asset('icon/style.css') }}">
 
 </head>
 

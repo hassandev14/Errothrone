@@ -24,8 +24,4 @@ class User extends Model
       protected $casts = [
         'password' => 'hashed',  // Hashing the password before saving
     ];
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'user_id');  // The second argument is the foreign key in the brands table
-    }
 }
