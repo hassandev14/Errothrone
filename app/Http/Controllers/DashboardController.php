@@ -13,9 +13,10 @@ class DashboardController extends Controller
 {
    public function index()
    {
-      $customers = Customer::all()->count();
-      $orders = Order::all()->count();
-      $totalSales = Payment::sum('amount');
+      $customers = Customer::all()->count(); // Count all customers
+      $orders = Order::all()->count(); // Count all orders
+      $deliveredOrders = Order::where('status', 'delivered')->count();  // Count all delivered orders
+      $totalSales = Payment::sum('amount'); // Sum total sales
 
       $startOfWeek = Carbon::now()->startOfWeek();  // Start of the current week 
       $endOfWeek = Carbon::now()->endOfWeek();      // End of the current week 
@@ -23,6 +24,6 @@ class DashboardController extends Controller
       // Orders ko filter karna jo current week mein aaye
       $ordersThisWeek = Order::whereBetween('created_at', [$startOfWeek, $endOfWeek])->count();
 
-      return view('layout.main', compact('customers', 'orders','totalSales','ordersThisWeek'), ['title' => 'Dashboard']);
+      return view('layout.main', compact('deliveredOrders', 'customers', 'orders','totalSales','ordersThisWeek'), ['title' => 'Dashboard']);
    }
 }

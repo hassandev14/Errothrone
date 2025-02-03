@@ -29,7 +29,6 @@ class BrandsController extends Controller
         // Validate input
         $request->validate([
             'name' => 'required|string|max:255|unique:brands,name',
-            'price' => 'nullable|numeric',  // Validate the price field
             'desc' => 'nullable|string',  // Validate the description field
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Image validation
         ]);
@@ -59,16 +58,13 @@ class BrandsController extends Controller
             // If no image is uploaded, set the path to null or handle accordingly
             $imagePath = null;
         }
-
         // Create a new brand record in the database
         Brand::create([
             'name' => $request->name,
             'category_id' => $request->category_id,
-            'price' => $request->price,
             'desc' => $request->desc,
             'image_name' => $imagePath,
         ]);
-
         // Redirect to brand index with success message
         return redirect()->route('brands.index')->with('success', 'Brand added successfully!');
     }

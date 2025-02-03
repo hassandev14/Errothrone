@@ -19,7 +19,7 @@
                 </div>
                 <div>
                     <div class="body-text mb-2">Total Sales</div>
-                    <h4>34,945</h4>
+                    <h4>{{ $orders }}</h4>
                 </div>
             </div>
             <div class="box-icon-trending up">
@@ -44,7 +44,7 @@
                 </div>
                 <div>
                     <div class="body-text mb-2">Total Income</div>
-                    <h4>$37,802</h4>
+                    <h4>{{ $totalSales }}</h4>
                 </div>
             </div>
             <div class="box-icon-trending down">
@@ -69,7 +69,7 @@
                 </div>
                 <div>
                     <div class="body-text mb-2">Orders Paid</div>
-                    <h4>34,945</h4>
+                    <h4>{{ $deliveredOrders }}</h4>
                 </div>
             </div>
             <div class="box-icon-trending">
@@ -94,7 +94,7 @@
                 </div>
                 <div>
                     <div class="body-text mb-2">Total Visitor</div>
-                    <h4>34,945</h4>
+                    <h4>{{ $customers }}</h4>
                 </div>
             </div>
             <div class="box-icon-trending up">
