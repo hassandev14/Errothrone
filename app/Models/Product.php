@@ -35,4 +35,8 @@ class Product extends Model
     {
         return $this->belongsTo(Stock::class, 'stock_id');  // Correct foreign key
     }
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class);
+    }
 }

@@ -57,7 +57,7 @@
                                 @if ($category->subcategories->isNotEmpty())
                                     @foreach ($category->subcategories as $subcategory)
                                         <div class="form-check mb-2 ml-4"> <!-- Indent Subcategories -->
-                                            <input type="checkbox" class="subcategory-checkbox" name="category_ids[]" value="{{ $subcategory->id }}" id="subcategory-{{ $subcategory->id }}">
+                                            <input type="checkbox" class="subcategory-checkbox" name="sub_category_ids[]" value="{{ $subcategory->id }}" id="subcategory-{{ $subcategory->id }}">
                                             <label class="form-check-label" for="subcategory-{{ $subcategory->id }}">{{ $subcategory->name }}</label>
                                         </div>
                                     @endforeach

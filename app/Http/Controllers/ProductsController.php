@@ -27,6 +27,7 @@ class ProductsController extends Controller
     // Store a new brand
     public function store(Request $request)
     {
+        dd($request);
         // Validate input
         $request->validate([
             'name' => 'required|string|max:255|unique:products,name',
@@ -64,8 +65,8 @@ class ProductsController extends Controller
         // Create a new brand record in the database
         Product::create([
             'name' => $request->name,
-            'category_id' => $request->category_id,
-            'brand_id' => $request->brand_id,
+            'category_id' => $request->category_ids[0],
+            'brand_id' => $request->brand_ids[0],
             'price' => $request->price,
             'description' => $request->description,
             'image_name' => $imagePath,
