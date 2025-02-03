@@ -1,4 +1,5 @@
 @include('layout.header')
+
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">Add Product</div>
@@ -15,46 +16,71 @@
                 </div>
 
                 <div class="form-group-row row">
-                    <!-- Category Dropdown -->
-                    <div class="col-md-6">
-                        <label for="cc-payment" class="control-label mb-1">Category</label>
-                        <select class="form-control" name="category_id" style="width: 100%;" required>
-                            <option value="none">-- Select Category --</option>
-                            @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <!-- Brand Dropdown (assuming you have another select for brand) -->
-                    <div class="col-md-6">
-                        <label for="cc-payment" class="control-label mb-1">Brand</label>
-                        <select class="form-control" name="brand_id" style="width: 100%;" required>
-                            <option value="none">-- Select Brand --</option>
-                            @foreach ($brands as $brand)
-                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group-row row">
-                    <div class="col-md-4">
-                        <label>Product Price <span class="text text-red">*</span></label>
-                        <input name="price" type="number" class="form-control" value="{{ old('name') }}" required>
-                    </div>
+                    <!-- Left Side: Main Form (Product Name, Price, Description, Image) -->
                     <div class="col-md-8">
-                        <label for="book_img">Product Image</label>
-                        <input type="file" class="form-control" name="image" id="image">
-                        <small class="label label-warning">Cover Photo will be uploaded</small>
+                        <!-- Product Price Section -->
+                        <div class="form-group">
+                            <label>Product Price <span class="text text-red">*</span></label>
+                            <input name="price" type="number" class="form-control" value="{{ old('price') }}" required>
+                        </div>
+
+                        <!-- Product Image Section -->
+                        <div class="form-group-row row">
+                            <div class="col-md-12">
+                                <label for="book_img">Product Image</label>
+                                <input type="file" class="form-control" name="image" id="image">
+                                <small class="label label-warning">Cover Photo will be uploaded</small>
+                            </div>
+                        </div>
+
+                        <!-- Product Description Section -->
+                        <div class="form-group">
+                            <label for="description">Description <span class="text text-red">*</span></label>
+                            <textarea name="description" class="form-control" rows="2" required>{{ old('desc') }}</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Category and Brand -->
+                    <div class="col-md-4">
+                        <!-- Category Box -->
+                        <div class="border p-3 rounded shadow-sm mb-3" style="max-height: 300px; overflow-y: auto;">
+                            <label for="cc-payment" class="control-label mb-1">Category</label>
+                            
+                            <!-- Loop through categories and create checkboxes -->
+                            @foreach ($categories as $category)
+                                <div class="form-check mb-2">
+                                    <input type="checkbox" class="category-checkbox" name="category_ids[]" value="{{ $category->id }}" id="category-{{ $category->id }}">
+                                    <label class="form-check-label" for="category-{{ $category->id }}">{{ $category->name }}</label>
+                                </div>
+
+                                <!-- Check for Subcategories -->
+                                @if ($category->subcategories->isNotEmpty())
+                                    @foreach ($category->subcategories as $subcategory)
+                                        <div class="form-check mb-2 ml-4"> <!-- Indent Subcategories -->
+                                            <input type="checkbox" class="subcategory-checkbox" name="category_ids[]" value="{{ $subcategory->id }}" id="subcategory-{{ $subcategory->id }}">
+                                            <label class="form-check-label" for="subcategory-{{ $subcategory->id }}">{{ $subcategory->name }}</label>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        </div>
+
+                        <!-- Brand Box -->
+                        <div class="border p-3 rounded shadow-sm mb-3">
+                            <label for="cc-payment" class="control-label mb-1">Brand</label>
+
+                            <!-- Loop through brands and create checkboxes -->
+                            @foreach ($brands as $brand)
+                                <div class="form-check mb-2">
+                                    <input type="checkbox" class="brand-checkbox" name="brand_ids[]" value="{{ $brand->id }}" id="brand-{{ $brand->id }}">
+                                    <label class="form-check-label" for="brand-{{ $brand->id }}">{{ $brand->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="description">Description <span class="text text-red">*</span></label>
-                    <textarea name="description" class="form-control" rows="4" required>{{ old('desc') }}</textarea>
-                </div>
-
+                <!-- Submit Button -->
                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                     <span id="payment-button-amount">Add Product</span>
                     <span id="payment-button-sending" style="display:none;">Sending…</span>
@@ -63,4 +89,29 @@
         </div>
     </div>
 </div>
+
 @include('layout.footer')
+
+<script>
+    // Handle "Select All" functionality for category checkboxes
+    document.getElementById('select-all-category').addEventListener('change', function() {
+        const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+        const subcategoryCheckboxes = document.querySelectorAll('.subcategory-checkbox');
+
+        categoryCheckboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+
+        subcategoryCheckboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+
+    // Handle "Select All" functionality for brand checkboxes
+    document.getElementById('select-all-brand').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('.brand-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+</script>

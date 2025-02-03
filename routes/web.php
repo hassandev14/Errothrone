@@ -14,6 +14,7 @@ use App\Http\Controllers\orderReturnController;
 use App\Http\Controllers\cartCpntroller;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\stockController;
+use App\Http\Controllers\SubCategoryController;
 
 
 
@@ -132,4 +133,15 @@ Route::get('/payments', [PaymentsController::class, 'index'])->name('payments.in
 
 // Delete Cart ITEM 
 Route::get('/payments/{id}', [PaymentsController::class, 'destroy'])->name('payments.delete');
+
+/////////////////////////////////////////////////  ORDERS ITEM ROUTES   //////////////////////////////////////////////////////////
+
+Route::get('/sub_categories', [SubCategoryController::class, 'index'])->name('sub_categories.index');
+
+// Show Add Category Form
+Route::get('/sub_categories/create', [SubCategoryController::class, 'create'])->name('sub_categories.create');
+
+// Store Category
+Route::post('/add_sub_categories', [SubCategoryController::class, 'store'])->name('sub_categories.store');
+
 // });

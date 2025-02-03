@@ -22,6 +22,13 @@
                         <li>
                             <a href="{{ route('categories.create') }}">Add Category</a>
                         </li>
+                            <!-- Sub Category -->
+                        <li>
+                            <a href="{{ route('sub_categories.index') }}">Sub Category List</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('sub_categories.create') }}">Add Sub Category</a>
+                        </li>
                     </ul>
                 </li>
                 <!-- BRANDS LINKS -->
