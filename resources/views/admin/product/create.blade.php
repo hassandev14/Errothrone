@@ -44,7 +44,7 @@
                         <!-- Product Description Section -->
                         <div class="form-group">
                             <label for="description">Description <span class="text text-red">*</span></label>
-                            <textarea name="description" class="form-control" rows="2" required>{{ old('desc') }}</textarea>
+                            <textarea name="description" class="form-control" rows="4" required>{{ old('desc') }}</textarea>
                         </div>
                     </div>
 

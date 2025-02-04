@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+            $table->id(); // Auto-incrementing ID (BIGINT UNSIGNED)
+            $table->string('name')->unique(); // Category name (VARCHAR(255) UNIQUE)
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('cascade'); // Self-referencing foreign key (parent_id)
+            $table->timestamps(); // created_at, updated_at timestamps
         });
     }
 

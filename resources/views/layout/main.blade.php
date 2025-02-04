@@ -1,5 +1,5 @@
 @include('layout.header')
-
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 <div class="overview-wrap">
     <h2 class="title-1">overview</h2>
 </div>

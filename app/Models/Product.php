@@ -13,7 +13,7 @@ class Product extends Model
         'description',
         'price',
         'image_name',
-    
+
     ];
     public function category()
     {
@@ -39,5 +39,9 @@ class Product extends Model
     public function subCategory()
     {
         return $this->belongsTo(SubCategory::class);
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 }
