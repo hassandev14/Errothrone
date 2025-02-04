@@ -10,6 +10,14 @@
             <hr>
             <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data" novalidate="novalidate">
                 @csrf
+                @if($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                @endif
+
                 <div class="form-group">
                     <label>Product Name <span class="text text-red">*</span></label>
                     <input name="name" type="text" class="form-control" value="{{ old('name') }}" required>
@@ -45,36 +53,47 @@
                         <!-- Category Box -->
                         <div class="border p-3 rounded shadow-sm mb-3" style="max-height: 300px; overflow-y: auto;">
                             <label for="cc-payment" class="control-label mb-1">Category</label>
-                            
+
+                            <!-- "Select All" functionality for categories -->
+                            <div class="form-check mb-2">
+                            </div>
+
                             <!-- Loop through categories and create checkboxes -->
                             @foreach ($categories as $category)
-                                <div class="form-check mb-2">
-                                    <input type="checkbox" class="category-checkbox" name="category_ids[]" value="{{ $category->id }}" id="category-{{ $category->id }}">
-                                    <label class="form-check-label" for="category-{{ $category->id }}">{{ $category->name }}</label>
-                                </div>
+                            <div class="form-check mb-2">
+                                <input type="checkbox" class="category-checkbox" name="category_ids[]" value="{{ $category->id }}" id="category-{{ $category->id }}">
+                                <label class="form-check-label" for="category-{{ $category->id }}">{{ $category->name }}</label>
+                            </div>
 
-                                <!-- Check for Subcategories -->
-                                @if ($category->subcategories->isNotEmpty())
-                                    @foreach ($category->subcategories as $subcategory)
-                                        <div class="form-check mb-2 ml-4"> <!-- Indent Subcategories -->
-                                            <input type="checkbox" class="subcategory-checkbox" name="sub_category_ids[]" value="{{ $subcategory->id }}" id="subcategory-{{ $subcategory->id }}">
-                                            <label class="form-check-label" for="subcategory-{{ $subcategory->id }}">{{ $subcategory->name }}</label>
-                                        </div>
-                                    @endforeach
-                                @endif
+                            <!-- Check for Subcategories -->
+                            @if ($category->subcategories->isNotEmpty())
+                            <!-- Subcategory Section -->
+                            <div class="ml-4">
+                                @foreach ($category->subcategories as $subcategory)
+                                <div class="form-check mb-2">
+                                    <input type="checkbox" class="subcategory-checkbox" name="sub_category_ids[]" value="{{ $subcategory->id }}" id="subcategory-{{ $subcategory->id }}">
+                                    <label class="form-check-label" for="subcategory-{{ $subcategory->id }}">{{ $subcategory->name }}</label>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endif
                             @endforeach
                         </div>
 
                         <!-- Brand Box -->
                         <div class="border p-3 rounded shadow-sm mb-3">
-                            <label for="cc-payment" class="control-label mb-1">Brand</label>
+                            <label for="cc-payment" class="control-label mb-1">Brands</label>
+
+                            <!-- "Select All" functionality for brands -->
+                            <div class="form-check mb-2">
+                            </div>
 
                             <!-- Loop through brands and create checkboxes -->
                             @foreach ($brands as $brand)
-                                <div class="form-check mb-2">
-                                    <input type="checkbox" class="brand-checkbox" name="brand_ids[]" value="{{ $brand->id }}" id="brand-{{ $brand->id }}">
-                                    <label class="form-check-label" for="brand-{{ $brand->id }}">{{ $brand->name }}</label>
-                                </div>
+                            <div class="form-check mb-2">
+                                <input type="checkbox" class="brand-checkbox" name="brand_ids[]" value="{{ $brand->id }}" id="brand-{{ $brand->id }}">
+                                <label class="form-check-label" for="brand-{{ $brand->id }}">{{ $brand->name }}</label>
+                            </div>
                             @endforeach
                         </div>
                     </div>

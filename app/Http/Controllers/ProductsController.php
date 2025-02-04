@@ -11,7 +11,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->get();
+        $products = Product::with(['category'])->get();
         return view('admin.product.index', compact('products'), ['title' => 'Products']);
     }
 
@@ -27,15 +27,23 @@ class ProductsController extends Controller
     // Store a new brand
     public function store(Request $request)
     {
-        dd($request);
         // Validate input
         $request->validate([
             'name' => 'required|string|max:255|unique:products,name',
-            'price' => 'nullable|numeric',  // Validate the price field
-            'desc' => 'nullable|string',  // Validate the description field
+            'price' => 'nullable|numeric',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Image validation
+            'category_ids' => 'required|array|min:1', // Ensure at least one value is selected
+            'category_ids.*' => 'string', // Make sure each selected value is a string
+            'sub_category_ids' => 'required|array|min:1', // Ensure at least one value is selected
+            'sub_category_ids.*' => 'string', // Make sure each selected value is a string
+            'brand_ids' => 'required|array|min:1', // Ensure at least one value is selected
+            'brand_ids.*' => 'string', // Make sure each selected value is a string
         ]);
-
+        // Convert the arrays to comma-separated values
+        $category_ids = implode(',', $request->input('category_ids'));
+        $sub_category_ids = implode(',', $request->input('sub_category_ids'));
+        $brand_ids = implode(',', $request->input('brand_ids'));
         // Handle the image upload if it exists
         if ($request->hasFile('image')) {
             // Get the uploaded image file
@@ -62,20 +70,20 @@ class ProductsController extends Controller
             $imagePath = null;
         }
 
-        // Create a new brand record in the database
+        // Store the product in the database
         Product::create([
             'name' => $request->name,
-            'category_id' => $request->category_ids[0],
-            'brand_id' => $request->brand_ids[0],
+            'category_id' => $category_ids, // Comma-separated category IDs
+            'sub_category_id' => $sub_category_ids, // Comma-separated sub-category IDs
+            'brand_id' => $brand_ids, // Comma-separated brand IDs
             'price' => $request->price,
             'description' => $request->description,
             'image_name' => $imagePath,
         ]);
 
-        // Redirect to brand index with success message
-        return redirect()->route('products.index')->with('success', 'Products added successfully!');
+        // Redirect to products index with success message
+        return redirect()->route('products.index')->with('success', 'Product added successfully!');
     }
-
 
     // Show edit form
     public function edit($id)
@@ -87,7 +95,7 @@ class ProductsController extends Controller
         $categories = Category::all();
 
         // Get all brand
-        $brands = Brand::all(); 
+        $brands = Brand::all();
         return view('admin.product.update', compact('brands', 'categories', 'products'), ['title' => 'Edit Products']);
     }
 
@@ -121,7 +129,7 @@ class ProductsController extends Controller
 
         // Update the brand
         $product->update([
-           'name' => $request->name,
+            'name' => $request->name,
             'category_id' => $request->category_id,
             'brand_id' => $request->brand_id,
             'price' => $request->price,
