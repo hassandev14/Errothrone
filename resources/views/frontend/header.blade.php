@@ -2,138 +2,177 @@
 <html lang="en">
 
 <head>
-    <!-- set the encoding of your site -->
     <meta charset="utf-8">
-    <!-- set the Compatible of your site -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- set the page title -->
     <title>{{ $title }}</title>
-    <!-- include the site Google Fonts stylesheet -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:300,400,500,700,900&display=swap" rel="stylesheet">
 
-    <!-- include the site bootstrap stylesheet -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap & FontAwesome -->
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.css') }}">
-
-    <!-- include the site fontawesome stylesheet -->
     <link rel="stylesheet" href="{{ asset('frontend/css/fontawesome.css') }}">
-
-    <!-- include the site stylesheet -->
+    
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-
-    <!-- include theme plugins setting stylesheet -->
     <link rel="stylesheet" href="{{ asset('frontend/css/plugins.css') }}">
-
-    <!-- include theme color setting stylesheet -->
     <link rel="stylesheet" href="{{ asset('frontend/css/color.css') }}">
-
-    <!-- include theme responsive setting stylesheet -->
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
 
+    <style>
+        /* Header Styling */
+        #header {
+            position: relative;
+            z-index: 1000;
+            background: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Navbar Styling */
+        .category-navbar {
+            position: relative;
+            background: #fff;
+            border-bottom: 2px solid #ddd;
+            padding: 10px 0;
+            font-weight: 600;
+            z-index: 999;
+        }
+
+        .category-navbar .nav-link {
+            color: #333;
+            text-transform: uppercase;
+            padding: 12px 15px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .category-navbar .nav-link:hover {
+            color: #28a745;
+        }
+
+        /* Mega Menu Styling */
+        .mega-menu {
+            min-width: 600px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+
+        .mega-menu h6 {
+            font-size: 14px;
+            font-weight: bold;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .mega-menu .dropdown-item {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .mega-menu .dropdown-item:hover {
+            color: #28a745;
+            background: transparent;
+        }
+
+    </style>
 </head>
 
 <body>
-    <!-- pageWrapper -->
-    <div id="pageWrapper">
-        <!-- pageHeader -->
-        <header id="header" class="pt-lg-5 pt-md-3 pt-2 position-absolute w-100">
-            <div class="container-fluid px-xl-17 px-lg-5 px-md-3 px-0 d-flex flex-wrap">
-                <div class="col-6 col-sm-3 col-lg-2 order-sm-2 order-md-0 dis-none">
-                    <!-- langList -->
-                    <ul class="nav nav-tabs langList pt-xl-6 pt-lg-4 pt-3 border-bottom-0">
-                        <li>
-                            <a class="icon-menu" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                            <div class="dropdown-menu pl-4 pr-4">
-                                <a class="dropdown-item" href="javascript:void(0);">Login</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Registration</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Logout</a>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle text-uppercase" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">ENG</a>
-                            <div class="dropdown-menu pl-4 pr-4">
-                                <a class="dropdown-item" href="javascript:void(0);">English</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Vietnamese</a>
-                                <a class="dropdown-item" href="javascript:void(0);">French</a>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle text-uppercase" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">USD</a>
-                            <div class="dropdown-menu text-uppercase pl-4 pr-4 border-0">
-                                <a class="dropdown-item" href="javascript:void(0);">USD</a>
-                                <a class="dropdown-item" href="javascript:void(0);">VND</a>
-                                <a class="dropdown-item" href="javascript:void(0);">euro</a>
-                            </div>
-                        </li>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- Logo -->
+            <a href="home.html"><img src="{{ asset('frontend/images/logo.png') }}" alt="Botanical" class="img-fluid"></a>
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto text-uppercase">
+                        <li class="nav-item active"><a class="nav-link" href="home.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="shop.html">Store</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-12 col-sm-6 col-lg-8 static-block">
-                    <!-- mainHolder -->
-                    <div class="mainHolder justify-content-center">
-                        <!-- pageNav1 -->
-                        <nav class="navbar navbar-expand-lg navbar-light p-0 pageNav1 position-static">
-                            <button type="button" class="navbar-toggle collapsed position-relative mt-md-2" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarNav">
-                                <ul class="navbar-nav mx-auto text-uppercase d-inline-block">
-                                    <li class="nav-item active dropdown">
-                                        <a class="dropdown-toggle d-block" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">home</a>
-                                        <ul class="list-unstyled text-capitalize border-right border-bottom border-left dropdown-menu mt-0 py-0">
-                                            <li class="d-block mx-0"><a href="home.html">Home 1</a></li>
-                                            <li class="d-block mx-0"><a href="home2.html">Home 2</a></li>
-                                            <li class="d-block mx-0"><a href="home3.html">Home 3</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="dropdown-toggle d-block" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Store</a>
-                                        <ul class="list-unstyled text-capitalize border-right border-bottom border-left dropdown-menu mt-0 py-0">
-                                            <li class="d-block mx-0"><a href="shop.html">Shop Left Sidebar</a></li>
-                                            <li class="d-block mx-0"><a href="shop-detail.html">Single Product</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="d-block" href="about-us.html">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nLogo" href="home.html"><img src="{{ asset('frontend/images/logo.png') }}" alt="Botanical" class="img-fluid"></a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="dropdown-toggle d-block" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                        <ul class="list-unstyled text-capitalize border-right border-bottom border-left dropdown-menu mt-0 py-0">
-                                            <li class="d-block mx-0"><a href="blog.html">Blog Left Sidebar</a></li>
-                                            <li class="d-block mx-0"><a href="blog-detail.html">Blog Detail</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="dropdown-toggle d-block" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                        <ul class="list-unstyled text-capitalize border-right border-bottom border-left dropdown-menu mt-0 py-0">
-                                            <li class="d-block mx-0"><a href="cart-page.html">Cart Page</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="d-block" href="contact-us.html">contact</a>
-                                    </li>
-                                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Categories Navbar -->
+    <nav class="category-navbar">
+        <div class="container">
+            <ul class="nav justify-content-center">
+                <!-- Brands with Subcategories -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="brandsDropdown" data-toggle="dropdown">
+                        🏷️ Brands
+                    </a>
+                    <div class="dropdown-menu mega-menu p-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>🌿 Botanical Co.</h6>
+                                <a class="dropdown-item" href="#">Indoor Plants</a>
+                                <a class="dropdown-item" href="#">Outdoor Plants</a>
+                                <a class="dropdown-item" href="#">Herbs</a>
                             </div>
-                        </nav>
-                        <div class="logo">
-                            <a href="home.html"><img src="{{ asset('frontend/images/logo.png') }}" alt="Botanical" class="img-fluid"></a>
+                            <div class="col-md-4">
+                                <h6>🌳 Evergreen</h6>
+                                <a class="dropdown-item" href="#">Bonsai</a>
+                                <a class="dropdown-item" href="#">Cactus</a>
+                                <a class="dropdown-item" href="#">Succulents</a>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>🌼 Floral Essence</h6>
+                                <a class="dropdown-item" href="#">Roses</a>
+                                <a class="dropdown-item" href="#">Lilies</a>
+                                <a class="dropdown-item" href="#">Orchids</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-6 col-sm-3 col-lg-2 order-sm-3 order-md-0 dis-none">
-                    <!-- wishList -->
-                    <ul class="nav nav-tabs wishList pt-xl-5 pt-lg-4 pt-3 mr-xl-3 mr-0 justify-content-end border-bottom-0">
-                        <li class="nav-item"><a class="nav-link icon-search" href="javascript:void(0);"></a></li>
-                        <li class="nav-item"><a class="nav-link position-relative icon-heart" href="javascript:void(0);"><span class="num rounded d-block">1</span></a></li>
-                        <li class="nav-item"><a class="nav-link position-relative icon-cart" href="javascript:void(0);"><span class="num rounded d-block">2</span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </header>
-        <!-- main -->
-        <main>
+                </li>
+
+                <!-- Indoor Plants with Subcategories -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="indoorDropdown" data-toggle="dropdown">
+                        🏡 Indoor Plants
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Snake Plant</a>
+                        <a class="dropdown-item" href="#">Peace Lily</a>
+                        <a class="dropdown-item" href="#">Money Plant</a>
+                    </div>
+                </li>
+
+                <!-- Outdoor Plants -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="outdoorDropdown" data-toggle="dropdown">
+                        🌳 Outdoor Plants
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Palm Trees</a>
+                        <a class="dropdown-item" href="#">Fruit Trees</a>
+                        <a class="dropdown-item" href="#">Climbers</a>
+                    </div>
+                </li>
+
+                <!-- Herbs -->
+                <li class="nav-item"><a class="nav-link" href="#">🌿 Herbs</a></li>
+
+                <!-- Seeds -->
+                <li class="nav-item"><a class="nav-link" href="#">🌰 Seeds</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<main>
+
+

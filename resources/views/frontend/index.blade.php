@@ -16,7 +16,7 @@
 							</div>
 						</div>
 						<div class="imgHolder">
-							<img src="{{ asset('frontend/http://placehold.it/900x795') }}" alt="image description" class="img-fluid w-100">
+							<img src="http://placehold.it/900x795" alt="image description" class="img-fluid w-100">
 						</div>
 					</div>
 				</div>
@@ -111,7 +111,7 @@
 	<!-- mainHeader -->
 	<header class="col-12 mainHeader mb-7 text-center">
 		<h1 class="headingIV playfair fwEblod mb-4">Featured Product</h1>
-		<span class="headerBorder d-block mb-md-5 mb-3"><img src="images/hbdr.png" alt="Header Border" class="img-fluid img-bdr"></span>
+		<span class="headerBorder d-block mb-md-5 mb-3"><img src="{{ asset('frontend/images/hbdr.png') }}" alt="Header Border" class="img-fluid img-bdr"></span>
 		<p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
 	</header>
 	<div class="col-12 p-0 overflow-hidden d-flex flex-wrap">
@@ -352,7 +352,7 @@
 <div class="productOfferSec container overflow-hidden py-xl-12 py-lg-10 py-md-8 py-5">
 	<div class="row">
 		<div class="col-12 col-sm-6 mb-sm-0 mb-2">
-			<a href="shop.html" class="w-100"><img src="http://placehold.it/570x350" alt="image description" class="img-fluid"></a>
+			<a href="shop.html" class="w-100"><img src="https://via.placeholder.com/570x350" alt="image description" class="img-fluid"></a>
 		</div>
 		<div class="col-12 col-sm-6">
 			<a href="shop.html" class="w-100"><img src="http://placehold.it/570x350" alt="image description" class="img-fluid"></a>
