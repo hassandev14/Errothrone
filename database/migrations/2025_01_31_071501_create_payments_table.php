@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->string('payment_method');  // E.g., credit_card, paypal, stripe
             $table->enum('payment_status', ['pending', 'completed', 'failed', 'refunded'])->default('pending');
             $table->string('transaction_id')->unique();  // Unique transaction ID from payment gateway

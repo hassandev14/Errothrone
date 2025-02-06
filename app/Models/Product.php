@@ -38,7 +38,7 @@ class Product extends Model
     // Define the one-to-many relationship with SubCategory
     public function subCategory()
     {
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsToMany(SubCategory::class, 'product_subcategory');
     }
     public function categories()
     {

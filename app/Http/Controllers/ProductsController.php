@@ -27,62 +27,34 @@ class ProductsController extends Controller
     // Store a new brand
     public function store(Request $request)
     {
-        // Validate input
-        $request->validate([
-            'name' => 'required|string|max:255|unique:products,name',
-            'price' => 'nullable|numeric',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Image validation
-            'category_ids' => 'required|array|min:1', // Ensure at least one value is selected
-            'category_ids.*' => 'string', // Make sure each selected value is a string
-            'sub_category_ids' => 'required|array|min:1', // Ensure at least one value is selected
-            'sub_category_ids.*' => 'string', // Make sure each selected value is a string
-            'brand_ids' => 'required|array|min:1', // Ensure at least one value is selected
-            'brand_ids.*' => 'string', // Make sure each selected value is a string
+        // Validation
+        $validated = $request->validate([
+            'name'          => 'required|string|max:255',
+            'price'         => 'required|numeric',
+            'brand_id'      => 'required|exists:brands,id',
+            'categories'    => 'required|array',
+            'categories.*'  => 'exists:categories,id',
+            'subcategories' => 'nullable|array',
+            'subcategories.*' => 'exists:sub_categories,id',  // ya 'subcategories.*' => 'exists:sub_categories,id' agar table ka naam sub_categories ho
         ]);
-        // Convert the arrays to comma-separated values
-        $category_ids = implode(',', $request->input('category_ids'));
-        $sub_category_ids = implode(',', $request->input('sub_category_ids'));
-        $brand_ids = implode(',', $request->input('brand_ids'));
-        // Handle the image upload if it exists
-        if ($request->hasFile('image')) {
-            // Get the uploaded image file
-            $image = $request->file('image');
 
-            // Create a folder path for storing the image inside 'public/admin_images/products'
-            $folderPath = public_path('admin_images/products');
+        // Product create karna
+        $product = Product::create([
+            'name'     => $validated['name'],
+            'price'    => $validated['price'],
+            'brand_id' => $validated['brand_id'],
+            // agar koi aur fields hain to unhe bhi include karein
+        ]);
 
-            // Check if the folder exists, if not, create it
-            if (!file_exists($folderPath)) {
-                mkdir($folderPath, 0777, true); // Create the folder with proper permissions
-            }
+        // Many-to-many relationship update karna for categories
+        $product->categories()->attach($validated['categories']);
 
-            // Generate a unique name for the image to avoid overwriting
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-
-            // Move the image to the folder
-            $image->move($folderPath, $imageName);
-
-            // Store the relative path of the image in the database (relative to the 'public' directory)
-            $imagePath = 'admin_images/products/' . $imageName;
-        } else {
-            // If no image is uploaded, set the path to null or handle accordingly
-            $imagePath = null;
+        // Agar subcategories select hui hain to attach karein
+        if(isset($validated['subcategories'])) {
+            $product->subcategories()->attach($validated['subcategories']);
         }
 
-        // Store the product in the database
-        Product::create([
-            'name' => $request->name,
-            'category_id' => $category_ids, // Comma-separated category IDs
-            'sub_category_id' => $sub_category_ids, // Comma-separated sub-category IDs
-            'brand_id' => $brand_ids, // Comma-separated brand IDs
-            'price' => $request->price,
-            'description' => $request->description,
-            'image_name' => $imagePath,
-        ]);
-
-        // Redirect to products index with success message
-        return redirect()->route('products.index')->with('success', 'Product added successfully!');
+        return redirect()->route('products.index')->with('success', 'Product created successfully!');
     }
 
     // Show edit form

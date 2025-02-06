@@ -12,10 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sub_category', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('category_id'); // Foreign key
+            
+            // Correct foreign key syntax
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+        
             $table->timestamps();
         });
     }
