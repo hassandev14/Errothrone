@@ -7,8 +7,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Brand Name</th>
-                    <th>Category Name</th>
                     <th>Price</th>
                     <th>Description</th>
                     <th>Image</th>
@@ -20,8 +18,6 @@
                     <tr>
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
-                        <td>{{ $product->brand->name }}</td>
-                        <td>{{ $product->category->name }}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->description }}</td>
                         <td>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -29,34 +30,44 @@ class ProductsController extends Controller
     {
         // Validation
         $validated = $request->validate([
-            'name'          => 'required|string|max:255',
-            'price'         => 'required|numeric',
-            'brand_id'      => 'required|exists:brands,id',
-            'categories'    => 'required|array',
-            'categories.*'  => 'exists:categories,id',
-            'subcategories' => 'nullable|array',
-            'subcategories.*' => 'exists:sub_categories,id',  // ya 'subcategories.*' => 'exists:sub_categories,id' agar table ka naam sub_categories ho
+            'name'           => 'required|string|max:255',
+            'description'    => 'required',
+            'price'          => 'required|numeric',
+            'brand_ids'      => 'required|array',
+            'brand_ids.*'    => 'exists:brands,id',
+            'category_ids'   => 'required|array',
+            'category_ids.*' => 'exists:categories,id',
+            'sub_category_ids' => 'nullable|array',
+            'sub_category_ids.*' => 'exists:sub_category,id', // Ensure this table name is correct
         ]);
-
-        // Product create karna
+    
+        // Create the Product
         $product = Product::create([
-            'name'     => $validated['name'],
-            'price'    => $validated['price'],
-            'brand_id' => $validated['brand_id'],
-            // agar koi aur fields hain to unhe bhi include karein
+            'name'        => $validated['name'],
+            'price'       => $validated['price'],
+            'description' => $validated['description'],
         ]);
-
-        // Many-to-many relationship update karna for categories
-        $product->categories()->attach($validated['categories']);
-
-        // Agar subcategories select hui hain to attach karein
-        if(isset($validated['subcategories'])) {
-            $product->subcategories()->attach($validated['subcategories']);
+    
+        // Attach Categories and Subcategories to Product via category_product pivot table
+        if (isset($validated['category_ids']) && count($validated['category_ids']) > 0) {
+            foreach ($validated['category_ids'] as $categoryId) {
+                foreach ($validated['sub_category_ids'] as $subCategoryId) {
+                    // Insert into category_product pivot table with both category_id and sub_category_id
+                    DB::table('category_product')->insert([
+                        'product_id'     => $product->id,
+                        'category_id'    => $categoryId,
+                        'sub_category_id'=> $subCategoryId, // Assuming there's a column for sub_category_id
+                        'brand_id'    => $validated['brand_ids'][0],
+                        'created_at'     => now(),
+                        'updated_at'     => now(),
+                    ]);
+                }
+            }
         }
-
+    
         return redirect()->route('products.index')->with('success', 'Product created successfully!');
-    }
-
+    }    
+    
     // Show edit form
     public function edit($id)
     {
