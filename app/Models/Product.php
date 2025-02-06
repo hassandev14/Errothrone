@@ -36,9 +36,9 @@ class Product extends Model
         return $this->belongsTo(Stock::class, 'stock_id');  // Correct foreign key
     }
     // Define the one-to-many relationship with SubCategory
-    public function subCategory()
+    public function subcategories()
     {
-        return $this->belongsToMany(SubCategory::class, 'product_subcategory');
+        return $this->belongsToMany(SubCategory::class, 'category_product');
     }
     public function categories()
     {

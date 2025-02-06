@@ -10,7 +10,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($categories as $sub) { ?>
+                <?php foreach ($sub_category as $sub) { ?>
                     <tr>
                         <td>{{$sub->id}}</td>
                         <td>{{$sub->name}}</td>
