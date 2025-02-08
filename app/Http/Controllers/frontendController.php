@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class frontendController extends Controller
 {
     public function index()
     {
-        return view('frontend.index',['title' => 'Errothrone Internationol']);
+        $products = Product::all();
+        return view('frontend.index',compact('products') ,['title' => 'Errothrone Internationol']);
     }
 }

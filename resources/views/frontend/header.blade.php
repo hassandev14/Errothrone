@@ -33,13 +33,13 @@
         /* Navbar Styling */
         .category-navbar {
             position: relative;
-            background: #fff;
+            background: #d4edda; /* Light Green */
             border-bottom: 2px solid #ddd;
             padding: 10px 0;
             font-weight: 600;
             z-index: 999;
         }
-
+        
         .category-navbar .nav-link {
             color: #333;
             text-transform: uppercase;
