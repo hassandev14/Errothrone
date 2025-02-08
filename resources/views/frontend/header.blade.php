@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/color.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
-
     <style>
         /* Header Styling */
         #header {
@@ -88,7 +87,7 @@
     <header id="header">
         <div class="container d-flex justify-content-between align-items-center">
             <!-- Logo -->
-            <a href="home.html"><img src="{{ asset('frontend/images/logo.png') }}" alt="Botanical" class="img-fluid"></a>
+            <a href="home.html"><img src="{{ asset('images/logo.png') }}" alt="Botanical" class="img-fluid"></a>
 
             <!-- Navigation -->
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -97,10 +96,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto text-uppercase">
-                        <li class="nav-item active"><a class="nav-link" href="home.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="shop.html">Store</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/store">Store</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
                     </ul>
                 </div>
             </nav>
@@ -108,71 +107,34 @@
     </header>
 
     <!-- Categories Navbar -->
-    <nav class="category-navbar">
-        <div class="container">
-            <ul class="nav justify-content-center">
-                <!-- Brands with Subcategories -->
+<nav class="category-navbar">
+    <div class="container">
+    <ul class="nav justify-content-center">
+        @foreach($categories as $category)
+            @if($category->subcategories->isNotEmpty()) 
+                <!-- Sirf un categories ko dikhayein jisme subcategories hain -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="brandsDropdown" data-toggle="dropdown">
-                        🏷️ Brands
-                    </a>
-                    <div class="dropdown-menu mega-menu p-3">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h6>🌿 Botanical Co.</h6>
-                                <a class="dropdown-item" href="#">Indoor Plants</a>
-                                <a class="dropdown-item" href="#">Outdoor Plants</a>
-                                <a class="dropdown-item" href="#">Herbs</a>
-                            </div>
-                            <div class="col-md-4">
-                                <h6>🌳 Evergreen</h6>
-                                <a class="dropdown-item" href="#">Bonsai</a>
-                                <a class="dropdown-item" href="#">Cactus</a>
-                                <a class="dropdown-item" href="#">Succulents</a>
-                            </div>
-                            <div class="col-md-4">
-                                <h6>🌼 Floral Essence</h6>
-                                <a class="dropdown-item" href="#">Roses</a>
-                                <a class="dropdown-item" href="#">Lilies</a>
-                                <a class="dropdown-item" href="#">Orchids</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Indoor Plants with Subcategories -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="indoorDropdown" data-toggle="dropdown">
-                        🏡 Indoor Plants
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        {{ $category->name }}
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Snake Plant</a>
-                        <a class="dropdown-item" href="#">Peace Lily</a>
-                        <a class="dropdown-item" href="#">Money Plant</a>
+                        @foreach($category->subcategories as $subcategory)
+                            <a class="dropdown-item" href="#">
+                                {{ $subcategory->name }}
+                            </a>
+                        @endforeach
                     </div>
                 </li>
-
-                <!-- Outdoor Plants -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="outdoorDropdown" data-toggle="dropdown">
-                        🌳 Outdoor Plants
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Palm Trees</a>
-                        <a class="dropdown-item" href="#">Fruit Trees</a>
-                        <a class="dropdown-item" href="#">Climbers</a>
-                    </div>
+            @else
+                <!-- Agar subcategory nahi hai to simple link show karo -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ $category->name }}</a>
                 </li>
-
-                <!-- Herbs -->
-                <li class="nav-item"><a class="nav-link" href="#">🌿 Herbs</a></li>
-
-                <!-- Seeds -->
-                <li class="nav-item"><a class="nav-link" href="#">🌰 Seeds</a></li>
-            </ul>
-        </div>
-    </nav>
-
+            @endif
+        @endforeach
+    </ul>
+    </div>
+</nav>
 <main>
 
 

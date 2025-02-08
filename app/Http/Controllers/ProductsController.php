@@ -39,15 +39,42 @@ class ProductsController extends Controller
             'category_ids.*' => 'exists:categories,id',
             'sub_category_ids' => 'nullable|array',
             'sub_category_ids.*' => 'exists:sub_category,id', // Ensure this table name is correct
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ]);
+
+        if ($request->hasFile('image')) {
+            // Get the uploaded image file
+            $image = $request->file('image');
+
+            // Create a folder path for storing the image inside 'public/admin_images/brands'
+            $folderPath = public_path('admin_images/brands');
+
+            // Check if the folder exists, if not, create it
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0777, true); // Create the folder with proper permissions
+            }
+
+            // Generate a unique name for the image to avoid overwriting
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Move the image to the folder
+            $image->move($folderPath, $imageName);
+
+            // Store the relative path of the image in the database (relative to the 'public' directory)
+            $imagePath = 'admin_images/brands/' . $imageName;
+        } else {
+            // If no image is uploaded, set the path to null or handle accordingly
+            $imagePath = null;
+        }
     
         // Create the Product
         $product = Product::create([
             'name'        => $validated['name'],
             'price'       => $validated['price'],
             'description' => $validated['description'],
+            'image_name' =>  $imagePath,
         ]);
-    
+
         // Attach Categories and Subcategories to Product via category_product pivot table
         if (isset($validated['category_ids']) && count($validated['category_ids']) > 0) {
             foreach ($validated['category_ids'] as $categoryId) {

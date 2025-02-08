@@ -7,6 +7,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Category Name</th>
+                    <th>Sorting Order</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -15,6 +16,7 @@
                     <tr>
                         <td>{{$category->id}}</td>
                         <td>{{$category->name}}</td>
+                        <td>{{$category->sort_order}}</td>
                         <td><a href="{{ route('categories.edit', $category->id) }}">
                                 <li class="fa fa-edit"></li>
                             </a>

@@ -1,75 +1,75 @@
 @include('frontend.header')
-<!-- introBlock -->
+<style>
+    .banner {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+    }
+    .banner img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+    }
+    .banner::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+    .banner-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        text-align: center;
+    }
+    .banner h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .banner p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+    .btn-theme {
+        background: #ff6600;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+    .btn-theme:hover {
+        background: #cc5200;
+    }
+</style>
+<!-- Intro Block -->
 <section class="introBlock position-relative">
-	<div class="slick-fade">
-		<div>
-			<div class="align w-100 d-flex align-items-center bgCover" style="background-image: url(images/b-bg.jpg);">
-				<!-- holder -->
-				<div class="container position-relative holder pt-xl-10 pt-0">
-					<!-- py-12 pt-lg-30 pb-lg-25 -->
-					<div class="row">
-						<div class="col-12 col-xl-7">
-							<div class="txtwrap pr-lg-10">
-								<h1 class="fwEbold position-relative pb-lg-8 pb-4 mb-xl-7 mb-lg-6">Houseplant <span class="text-break d-block">The Perfect Choice.</span></h1>
-								<p class="mb-xl-15 mb-lg-10">Lorem ipsum is simply dummy text of the printing and typesetting industry <br>has been the industry's standard.</p>
-								<a href="shop.html" class="btn btnTheme btnShop fwEbold text-white md-round py-md-3 px-md-4 py-2 px-3">Shop Now <i class="fas fa-arrow-right ml-2"></i></a>
-							</div>
-						</div>
-						<div class="imgHolder">
-							<img src="http://placehold.it/900x795" alt="image description" class="img-fluid w-100">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div>
-			<div class="align w-100 d-flex align-items-center bgCover" style="background-image: url(images/b-bg2.jpg);">
-				<!-- holder -->
-				<div class="container position-relative holder pt-xl-10 pt-0">
-					<!-- py-12 pt-lg-30 pb-lg-25 -->
-					<div class="row">
-						<div class="col-12 col-xl-7">
-							<div class="txtwrap pr-lg-10">
-								<span class="title d-block text-uppercase fwEbold position-relative pl-2 mb-lg-5 mb-sm-3 mb-1">wellcome to botanical</span>
-								<h2 class="fwEbold position-relative mb-xl-7 mb-lg-5">Plants Gonna Make <span class="text-break d-block">People Happy.</span></h2>
-								<p class="mb-xl-15 mb-lg-10">Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-								<a href="shop.html" class="btn btnTheme btnShop fwEbold text-white md-round py-2 px-3 py-md-3 px-md-4">Shop Now <i class="fas fa-arrow-right ml-2"></i></a>
-							</div>
-						</div>
-						<div class="imgHolder">
-							<img src="http://placehold.it/800x700" alt="image description" class="img-fluid w-100">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div>
-			<div class="align w-100 d-flex align-items-center bgCover" style="background-image: url(images/b-bg3.jpg);">
-				<!-- holder -->
-				<div class="container position-relative holder pt-xl-10 pt-0">
-					<!-- py-12 pt-lg-30 pb-lg-25 -->
-					<div class="row">
-						<div class="col-12 col-xl-7">
-							<div class="txtwrap pr-lg-10">
-								<span class="title d-block text-uppercase fwEbold position-relative pl-2 mb-lg-5 mb-sm-3 mb-1">wellcome to botanical</span>
-								<h2 class="fwEbold position-relative mb-xl-7 mb-lg-5">Plants for healthy</h2>
-								<p class="mb-xl-15 mb-lg-10">Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-								<a href="shop.html" class="btn btnTheme btnShop fwEbold text-white md-round py-2 px-3 py-md-3 px-md-4">Shop Now <i class="fas fa-arrow-right ml-2"></i></a>
-							</div>
-						</div>
-						<div class="imgHolder">
-							<img src="http://placehold.it/820x815" alt="image description" class="img-fluid w-100">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="slickNavigatorsWrap">
-		<a href="#" class="slick-prev"><i class="icon-leftarrow"></i></a>
-		<a href="#" class="slick-next"><i class="icon-rightarrow"></i></a>
-	</div>
+    <div class="banner">
+        <img src="{{ asset('images/banner.webp') }}" alt="Banner Image">
+        <!-- <div class="banner-content">
+            <h1>Discover Amazing Deals</h1>
+            <p>Shop the latest collections at unbeatable prices.</p>
+        </div> -->
+    </div>
 </section>
+
 <!-- chooseUs-sec -->
 <section class="chooseUs-sec container pt-xl-22 pt-lg-20 pt-md-16 pt-10 pb-xl-12 pb-md-7 pb-2">
 	<div class="row">

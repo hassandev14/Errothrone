@@ -21,6 +21,9 @@ use App\Http\Controllers\frontendController;
 
 
 Route::get('/', [frontendController::class, 'index'])->name('home');
+Route::get('/about', [frontendController::class, 'about'])->name('about');
+Route::get('/store', [frontendController::class, 'store'])->name('store');
+Route::get('/contact', [frontendController::class, 'contact'])->name('contact');
 
 Route::get('/signup', [userController::class, 'signup_view']); // Displays signup form
 Route::get('/login', [userController::class, 'login_view'])->name('login'); // Displays login form
