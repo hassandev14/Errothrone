@@ -8,6 +8,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Price</th>
+                    <th>Short Desc</th>
                     <th>Description</th>
                     <th>Image</th>
                     <th>Action</th>
@@ -19,6 +20,7 @@
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->price }}</td>
+                        <td>{{ $product->short_desc }}</td>
                         <td>{{ $product->description }}</td>
                         <td>
                             <img src="{{ asset( $product->image_name) }}" alt="{{ $product->name }}" width="100">

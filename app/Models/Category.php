@@ -16,6 +16,10 @@ class Category extends Model
     {
         return $this->hasMany(Brand::class, 'category_id');  // The second argument is the foreign key in the brands table
     }
+    public function nav_brands()
+    {
+        return $this->belongsToMany(Brand::class, 'category_product', 'category_id', 'brand_id');
+    }
     public function product()
     {
         return $this->hasMany(Product::class); // A category has many products

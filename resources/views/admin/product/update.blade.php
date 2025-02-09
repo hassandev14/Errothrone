@@ -45,6 +45,11 @@
                 </div> <!-- End row for Category and Brand -->
 
                 <div class="form-group">
+                    <label for="desc">Short Description</label>
+                    <textarea name="short_desc" class="form-control" rows="2">{{ old('short_desc', $products->short_desc) }}</textarea>
+                </div>
+
+                <div class="form-group">
                     <label for="desc">Description</label>
                     <textarea name="description" class="form-control" rows="4">{{ old('description', $products->description) }}</textarea>
                 </div>

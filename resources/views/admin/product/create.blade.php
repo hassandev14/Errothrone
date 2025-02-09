@@ -40,11 +40,14 @@
                                 <small class="label label-warning">Cover Photo will be uploaded</small>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label for="description">Short Description <span class="text text-red">*</span></label>
+                            <textarea name="short_desc" class="form-control" rows="2" required>{{ old('short_desc') }}</textarea>
+                        </div>
                         <!-- Product Description Section -->
                         <div class="form-group">
                             <label for="description">Description <span class="text text-red">*</span></label>
-                            <textarea name="description" class="form-control" rows="4" required>{{ old('desc') }}</textarea>
+                            <textarea name="description" class="form-control" rows="4" required>{{ old('description') }}</textarea>
                         </div>
                     </div>
 

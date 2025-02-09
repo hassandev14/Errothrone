@@ -31,11 +31,29 @@
         z-index: 1;
     }
     .banner-content {
-        position: relative;
-        z-index: 2;
-        max-width: 700px;
-        text-align: center;
-    }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    max-width: 700px;
+    text-align: center;
+    color: white; /* White text for better contrast */
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Adds a shadow for better readability */
+	}
+
+	.banner-content h1 {
+		font-size: 36px;
+		margin-bottom: 10px;
+	}
+
+	.banner-content p {
+		font-size: 18px;
+		margin-top: 5px;
+		opacity: 0.9;
+	}
+
     .banner h1 {
         font-size: 3rem;
         font-weight: bold;
@@ -60,15 +78,17 @@
     }
 </style>
 <!-- Intro Block -->
+ @foreach($banners as $banner)
 <section class="introBlock position-relative">
     <div class="banner">
-        <img src="{{ asset('images/banner.webp') }}" alt="Banner Image">
+        <img src="{{ asset( $banner->image) }}" alt="Banner Image">
         <!-- <div class="banner-content">
-            <h1>Discover Amazing Deals</h1>
-            <p>Shop the latest collections at unbeatable prices.</p>
+            <h1>{{$banner->name}}</h1>
+            <p>{{$banner->desc}}.</p>
         </div> -->
     </div>
 </section>
+@endforeach
 
 <!-- chooseUs-sec -->
 <section class="chooseUs-sec container pt-xl-22 pt-lg-20 pt-md-16 pt-10 pb-xl-12 pb-md-7 pb-2">
@@ -115,29 +135,30 @@
 		<p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
 	</header>
 	<div class="col-12 p-0 overflow-hidden d-flex flex-wrap">
-		<!-- featureCol -->
-		@foreach($products as $product)
-		<div class="featureCol px-3 mb-6">
-			<div class="border">
-				<div class="imgHolder position-relative w-100 overflow-hidden">
-					<img src="{{ asset( $product->image_name) }}" alt="{{ $product->name }}" class="img-fluid w-100">
-					<ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
-						<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-heart d-block"></a></li>
-						<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-cart d-block"></a></li>
-						<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-eye d-block"></a></li>
-						<li class="overflow-hidden"><a href="javascript:void(0);" class="icon-arrow d-block"></a></li>
-					</ul>
-				</div>
-				<div class="text-center py-xl-5 py-sm-4 py-2 px-xl-2 px-1">
-					<span class="title d-block mb-2">
-						<a href="#">{{ $product->name }}</a>
-					</span>
-					<span class="price d-block fwEbold">{{ number_format($product->price) }} $</span>
-				</div>
-			</div>
-		</div>
-		@endforeach
-	</div>
+    <!-- featureCol -->
+    @foreach($products as $product)
+    <div class="featureCol px-3 mb-6">
+        <div class="border">
+            <div class="imgHolder position-relative w-100 overflow-hidden">
+                <img src="{{ asset($product->image_name) }}" alt="{{ $product->name }}" class="img-fluid w-100">
+                <ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
+                    <li class="mr-2 overflow-hidden">
+					<a href="product_detail/{{$product->id}}" class="icon-cart d-block"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-center py-xl-5 py-sm-4 py-2 px-xl-2 px-1">
+                <span class="title d-block mb-2">
+                   {{ $product->name }}
+                </span>
+                <span class="price d-block fwEbold">{{ number_format($product->price) }} $</span>
+                <span class="descroption d-block mb-2">{{ $product->short_desc }}</span>
+            </div>
+        </div>
+    </div>
+    @endforeach
+</div>
+
 </section>
 <!-- contactListBlock -->
 <div class="contactListBlock container overflow-hidden pt-xl-8 pt-lg-10 pt-md-8 pt-4 pb-xl-12 pb-lg-10 pb-md-4 pb-1">

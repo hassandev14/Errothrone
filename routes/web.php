@@ -11,19 +11,18 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\Order_itemsController;
 use App\Http\Controllers\orderReturnController;
-use App\Http\Controllers\cartCpntroller;
+use App\Http\Controllers\cartController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\stockController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\bannerController;
 use App\Http\Controllers\frontendController;
-
-
-
 
 Route::get('/', [frontendController::class, 'index'])->name('home');
 Route::get('/about', [frontendController::class, 'about'])->name('about');
 Route::get('/store', [frontendController::class, 'store'])->name('store');
 Route::get('/contact', [frontendController::class, 'contact'])->name('contact');
+Route::get('/product_detail/{id}', [frontendController::class, 'product_detail'])->name('product.detail');
 
 Route::get('/signup', [userController::class, 'signup_view']); // Displays signup form
 Route::get('/login', [userController::class, 'login_view'])->name('login'); // Displays login form
@@ -74,5 +73,11 @@ Route::get('/payments/{id}', [PaymentsController::class, 'destroy'])->name('paym
 Route::get('/sub_categories', [SubCategoryController::class, 'index'])->name('sub_categories.index');
 Route::get('/sub_categories/create', [SubCategoryController::class, 'create'])->name('sub_categories.create');
 Route::post('/add_sub_categories', [SubCategoryController::class, 'store'])->name('sub_categories.store');
-
+///////////////////////////////////////////////// BANNER ROUTES   //////////////////////////////////////////////////////////
+Route::get('/banneer', [bannerController::class, 'index'])->name('banners.index');
+Route::get('/banner/create', [bannerController::class, 'create'])->name('banners.create');
+Route::post('/banner', [bannerController::class, 'store'])->name('banners.store');
+Route::get('/banner/{id}/edit', [bannerController::class, 'edit'])->name('banners.edit');
+Route::put('/banner/{id}', [bannerController::class, 'update'])->name('banners.update');
+Route::get('/banner/{id}', [bannerController::class, 'destroy'])->name('banners.delete');
 // });

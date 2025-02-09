@@ -61,7 +61,7 @@ class ProductsController extends Controller
             $image->move($folderPath, $imageName);
 
             // Store the relative path of the image in the database (relative to the 'public' directory)
-            $imagePath = 'admin_images/brands/' . $imageName;
+            $imagePath = 'admin_images/products/' . $imageName;
         } else {
             // If no image is uploaded, set the path to null or handle accordingly
             $imagePath = null;

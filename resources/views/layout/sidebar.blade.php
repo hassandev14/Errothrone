@@ -31,6 +31,19 @@
                         </li>
                     </ul>
                 </li>
+                <!-- BANNERS LINKS -->
+                <li class="active has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-cogs"></i>Banner</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="{{ route('banners.index') }}">Banner List</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('banners.create') }}">Add Banner</a>
+                        </li>
+                    </ul>
+                </li>
                 <!-- BRANDS LINKS -->
                 <li class="active has-sub">
                     <a class="js-arrow" href="#">
