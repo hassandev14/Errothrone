@@ -10,7 +10,7 @@
 								<li class="mr-2">/</li>
 								<li class="mr-2">Shop</li>
 								<li class="mr-2">/</li>
-								<li class="active">{{$category_name}}</li>
+								<li class="active">{{$sub_category_name}}</li>
 							</ul>
 						</div>
 					</div>

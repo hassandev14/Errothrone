@@ -34,7 +34,29 @@ class subCategoryController extends Controller
         SubCategory::create($request->all());
         return redirect()->route('sub_categories.index', $request->category_id);
     }
+    public function edit($id)
+    {
+        $sub_category = SubCategory::find($id);
+        $categories = Category::all();
+        return view('admin.category.update_sub_category', compact('sub_category', 'categories'), ['title'=>'Edit Sub Category']);
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
 
-    // Other methods (edit, delete) will go here...
+        $sub_category = SubCategory::find($id);
+        $sub_category->update($request->all());
+        return redirect()->route('sub_categories.index', $request->category_id);
+    }
+    public function destroy($id)
+    {
+        $sub_category = SubCategory::find($id);
+        $sub_category->delete();
+        return redirect()->route('sub_categories.index');
+    }
 }
 

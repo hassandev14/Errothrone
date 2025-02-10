@@ -88,7 +88,6 @@ class BrandsController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
-            'price' => 'required|numeric|min:0',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -114,7 +113,6 @@ class BrandsController extends Controller
         $brand->update([
             'name' => $request->name,
             'category_id' => $request->category_id,
-            'price' => $request->price,
             'desc' => $request->desc,
             'image_name' => $imagePath,
         ]);

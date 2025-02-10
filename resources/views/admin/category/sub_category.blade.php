@@ -7,6 +7,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Sub Category Name</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -14,6 +15,13 @@
                     <tr>
                         <td>{{$sub->id}}</td>
                         <td>{{$sub->name}}</td>
+                        <td><a href="{{ route('sub_categories.edit', $sub->id) }}">
+                                <li class="fa fa-edit"></li>
+                            </a>
+                            <a href="{{ route('sub_categories.delete', $sub->id) }}">
+                                <li class="fa fa-trash"></li>
+                            </a>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>

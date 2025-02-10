@@ -89,43 +89,6 @@
     </div>
 </section>
 @endforeach
-
-<!-- chooseUs-sec -->
-<section class="chooseUs-sec container pt-xl-22 pt-lg-20 pt-md-16 pt-10 pb-xl-12 pb-md-7 pb-2">
-	<div class="row">
-		<div class="col-12 col-lg-6 mb-lg-0 mb-4">
-			<img src="http://placehold.it/570x590" alt="image description" class="img-fluid">
-		</div>
-		<div class="col-12 col-lg-6 pr-4">
-			<h2 class="headingII fwEbold playfair position-relative mb-6 pb-5">Why choose us ?</h2>
-			<p class="mb-xl-14 mb-lg-10">Lorem ipsum is simply dummy text of the printing and typesetting industry, lorem ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley ... <a href="javascript:void(0);" class="btnMore"><i>Learn More</i></a></p>
-			<!-- chooseList -->
-			<ul class="list-unstyled chooseList">
-				<li class="d-flex justify-content-start mb-xl-7 mb-lg-5 mb-3">
-					<span class="icon icon-plant"></span>
-					<div class="alignLeft d-flex justify-content-start flex-wrap">
-						<h3 class="headingIII fwEbold mb-2">Hand Planted</h3>
-						<p>There are many variations of passages of lorem ipsum available, but the majority have suffered alteration in some form.</p>
-					</div>
-				</li>
-				<li class="d-flex justify-content-start mb-xl-6 mb-lg-5 mb-4">
-					<span class="icon icon-ic-plant"></span>
-					<div class="alignLeft d-flex justify-content-start flex-wrap">
-						<h3 class="headingIII fwEbold mb-2">Natural Sunlight</h3>
-						<p>It is a long established fact that a reader will be distracted by the reable content of a page.</p>
-					</div>
-				</li>
-				<li class="d-flex justify-content-start">
-					<span class="icon icon-desert"></span>
-					<div class="alignLeft d-flex justify-content-start flex-wrap">
-						<h3 class="headingIII fwEbold mb-2">Clean Air</h3>
-						<p>There are many variations of passages of lorem ipsum available, but the majority have suffered.</p>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
-</section>
 <!-- featureSec -->
 <section class="featureSec container-fluid overflow-hidden pt-xl-12 pt-lg-10 pt-md-80 pt-5 pb-xl-10 pb-lg-4 pb-md-2 px-xl-14 px-lg-7">
 	<!-- mainHeader -->
@@ -134,29 +97,29 @@
 		<span class="headerBorder d-block mb-md-5 mb-3"><img src="{{ asset('frontend/images/hbdr.png') }}" alt="Header Border" class="img-fluid img-bdr"></span>
 		<p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
 	</header>
-	<div class="col-12 p-0 overflow-hidden d-flex flex-wrap">
+<div class="col-12 p-0 overflow-hidden d-flex flex-wrap">
     <!-- featureCol -->
-    @foreach($products as $product)
-    <div class="featureCol px-3 mb-6">
-        <div class="border">
-            <div class="imgHolder position-relative w-100 overflow-hidden">
-                <img src="{{ asset($product->image_name) }}" alt="{{ $product->name }}" class="img-fluid w-100">
-                <ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
-                    <li class="mr-2 overflow-hidden">
-					<a href="product_detail/{{$product->id}}" class="icon-cart d-block"></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="text-center py-xl-5 py-sm-4 py-2 px-xl-2 px-1">
-                <span class="title d-block mb-2">
-                   {{ $product->name }}
-                </span>
-                <span class="price d-block fwEbold">{{ number_format($product->price) }} $</span>
-                <span class="descroption d-block mb-2">{{ $product->short_desc }}</span>
-            </div>
-        </div>
-    </div>
-    @endforeach
+		@foreach($products as $product)
+		<div class="featureCol px-3 mb-6">
+			<div class="border">
+				<div class="imgHolder position-relative w-100 overflow-hidden">
+					<img src="{{ asset($product->image_name) }}" alt="{{ $product->name }}" class="img-fluid w-100">
+					<ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
+						<li class="mr-2 overflow-hidden">
+						<a href="product_detail/{{$product->id}}" class="icon-cart d-block"></a>
+						</li>
+					</ul>
+				</div>
+				<div class="text-center py-xl-5 py-sm-4 py-2 px-xl-2 px-1">
+					<span class="title d-block mb-2">
+					{{ $product->name }}
+					</span>
+					<span class="price d-block fwEbold">{{ number_format($product->price) }} $</span>
+					<span class="descroption d-block mb-2">{{ $product->short_desc }}</span>
+				</div>
+			</div>
+		</div>
+		@endforeach
 </div>
 
 </section>

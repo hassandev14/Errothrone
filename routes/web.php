@@ -17,12 +17,15 @@ use App\Http\Controllers\stockController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\bannerController;
 use App\Http\Controllers\frontendController;
+use App\Http\Controllers\whyChoseUsController;
 
 Route::get('/', [frontendController::class, 'index'])->name('home');
 Route::get('/about', [frontendController::class, 'about'])->name('about');
 Route::get('/store', [frontendController::class, 'store'])->name('store');
 Route::get('/contact', [frontendController::class, 'contact'])->name('contact');
-Route::get('/product_detail/{id}', [frontendController::class, 'product_detail'])->name('product.detail');
+Route::get('/product_detail/{id}', [frontendController::class, 'product_detail']);
+Route::get('/category/{name}', [frontendController::class, 'show_category'])->name('category.show');
+Route::get('/subcategory/{name}', [frontendController::class, 'show_sub_category'])->name('subcategory.show');
 
 Route::get('/signup', [userController::class, 'signup_view']); // Displays signup form
 Route::get('/login', [userController::class, 'login_view'])->name('login'); // Displays login form
@@ -73,6 +76,9 @@ Route::get('/payments/{id}', [PaymentsController::class, 'destroy'])->name('paym
 Route::get('/sub_categories', [SubCategoryController::class, 'index'])->name('sub_categories.index');
 Route::get('/sub_categories/create', [SubCategoryController::class, 'create'])->name('sub_categories.create');
 Route::post('/add_sub_categories', [SubCategoryController::class, 'store'])->name('sub_categories.store');
+Route::get('/sub_categories/{id}/edit', [SubCategoryController::class, 'edit'])->name('sub_categories.edit');
+Route::put('/sub_categories/{id}', [SubCategoryController::class, 'update'])->name('sub_categories.update');
+Route::get('/sub_categories/{id}', [SubCategoryController::class, 'destroy'])->name('sub_categories.delete');
 ///////////////////////////////////////////////// BANNER ROUTES   //////////////////////////////////////////////////////////
 Route::get('/banneer', [bannerController::class, 'index'])->name('banners.index');
 Route::get('/banner/create', [bannerController::class, 'create'])->name('banners.create');
@@ -80,4 +86,10 @@ Route::post('/banner', [bannerController::class, 'store'])->name('banners.store'
 Route::get('/banner/{id}/edit', [bannerController::class, 'edit'])->name('banners.edit');
 Route::put('/banner/{id}', [bannerController::class, 'update'])->name('banners.update');
 Route::get('/banner/{id}', [bannerController::class, 'destroy'])->name('banners.delete');
+///////////////////////////////////////////////// WHY CHOSE US ROUTES   //////////////////////////////////////////////////////////
+Route::get('/chose_us', [whyChoseUsController::class, 'index'])->name('chose_us.index');
+Route::get('/chose_us/create', [whyChoseUsController::class, 'create'])->name('chose_us.create');
+Route::post('/chose_us', [whyChoseUsController::class, 'store'])->name('chose_us.store');
+Route::get('/chose_us/{id}/edit', [whyChoseUsController::class, 'edit'])->name('chose_us.edit');
+Route::put('/chose_us/{id}', [whyChoseUsController::class, 'update'])->name('chose_us.update');
 // });

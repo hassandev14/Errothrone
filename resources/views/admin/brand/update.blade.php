@@ -10,6 +10,13 @@
             <form action="{{ route('brands.update', $brand->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT') <!-- Use PUT for update -->
+                @if($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                @endif
 
                 <div class="form-group">
                     <label for="name">Brand Name <span class="text text-red">*</span></label>
@@ -40,7 +47,7 @@
                     <small class="label label-warning">Cover Photo will be uploaded</small>
                     <br>
                     @if($brand->image_name)
-                    <img src="{{ asset('images/brands/' . $brand->image_name) }}" alt="{{ $brand->name }}" width="100">
+                    <img src="{{ asset($brand->image_name) }}" alt="{{ $brand->name }}" width="100">
                     @endif
                 </div>
 

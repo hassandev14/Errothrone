@@ -98,37 +98,42 @@ class ProductsController extends Controller
     // Show edit form
     public function edit($id)
     {
-        // Get the brand to edit, along with its associated category
-        $products = Product::findOrFail($id);
-
-        // Get all categories for the dropdown
-        $categories = Category::all();
-
-        // Get all brand
+        $products = Product::with(['categories', 'subcategories', 'brands'])->findOrFail($id);
+        $categories = Category::with('subcategories')->get();
         $brands = Brand::all();
-        return view('admin.product.update', compact('brands', 'categories', 'products'), ['title' => 'Edit Products']);
+
+        $selectedCategories = $products->categories ? $products->categories->pluck('id')->toArray() : [];
+        $selectedSubcategories = $products->subcategories ? $products->subcategories->pluck('id')->toArray() : [];
+        $selectedBrands = $products->brands ? $products->brands->pluck('id')->toArray() : [];
+        return view('admin.product.update', compact('products', 'categories', 'brands', 'selectedCategories', 'selectedSubcategories', 'selectedBrands'), ['title' => 'Edit Products']);
     }
 
-    // Update brand
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'category_ids' => 'required|array', // Ensure it's an array
+            'category_ids.*' => 'exists:categories,id', // Validate each category
+            'sub_category_ids' => 'nullable|array',
+            'sub_category_ids.*' => 'exists:sub_category,id',
+            'brand_ids' => 'required|array',
+            'brand_ids.*' => 'exists:brands,id',
             'price' => 'required|numeric|min:0',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+    
         $product = Product::findOrFail($id);
-
+    
         // Handle image upload if a new image is provided
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $folderPath = public_path('admin_images/products');
+    
             if (!file_exists($folderPath)) {
                 mkdir($folderPath, 0777, true);
             }
+    
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move($folderPath, $imageName);
             $imagePath = 'admin_images/products/' . $imageName;
@@ -136,19 +141,35 @@ class ProductsController extends Controller
             // Keep the old image if no new one is provided
             $imagePath = $product->image_name;
         }
-
-        // Update the brand
+    
+        // Update the product
         $product->update([
-            'name' => $request->name,
-            'category_id' => $request->category_id,
-            'brand_id' => $request->brand_id,
-            'price' => $request->price,
-            'description' => $request->description,
+            'name' => $validated['name'],
+            'price' => $validated['price'],
+            'description' => $validated['description'],
             'image_name' => $imagePath,
         ]);
-
-        return redirect()->route('products.index')->with('success', 'Products updated successfully!');
+    
+        // Attach Categories and Subcategories to Product via category_product pivot table
+        if (isset($validated['category_ids']) && count($validated['category_ids']) > 0) {
+            foreach ($validated['category_ids'] as $categoryId) {
+                foreach ($validated['sub_category_ids'] as $subCategoryId) {
+                    // Insert into category_product pivot table with both category_id and sub_category_id
+                    DB::table('category_product')->insert([
+                        'product_id'     => $product->id,
+                        'category_id'    => $categoryId,
+                        'sub_category_id'=> $subCategoryId, // Assuming there's a column for sub_category_id
+                        'brand_id'    => $validated['brand_ids'][0],
+                        'created_at'     => now(),
+                        'updated_at'     => now(),
+                    ]);
+                }
+            }
+        }
+    
+        return redirect()->route('products.index')->with('success', 'Product updated successfully!');
     }
+    
 
     // Delete brand
     public function destroy($id)
