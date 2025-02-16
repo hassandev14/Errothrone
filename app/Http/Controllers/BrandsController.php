@@ -39,7 +39,7 @@ class BrandsController extends Controller
             $image = $request->file('image');
 
             // Create a folder path for storing the image inside 'public/admin_images/brands'
-            $folderPath = public_path('admin_images/brands');
+            $folderPath = public_path('storage/admin_images/brands');
 
             // Check if the folder exists, if not, create it
             if (!file_exists($folderPath)) {
@@ -53,7 +53,7 @@ class BrandsController extends Controller
             $image->move($folderPath, $imageName);
 
             // Store the relative path of the image in the database (relative to the 'public' directory)
-            $imagePath = 'admin_images/brands/' . $imageName;
+            $imagePath = 'storage/admin_images/brands/' . $imageName;
         } else {
             // If no image is uploaded, set the path to null or handle accordingly
             $imagePath = null;
@@ -89,7 +89,7 @@ class BrandsController extends Controller
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $brand = Brand::findOrFail($id);
@@ -97,13 +97,13 @@ class BrandsController extends Controller
         // Handle image upload if a new image is provided
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $folderPath = public_path('admin_images/brands');
+            $folderPath = public_path('storage/admin_images/brands');
             if (!file_exists($folderPath)) {
                 mkdir($folderPath, 0777, true);
             }
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move($folderPath, $imageName);
-            $imagePath = 'admin_images/brands/' . $imageName;
+            $imagePath = 'storage/admin_images/brands/' . $imageName;
         } else {
             // Keep the old image if no new one is provided
             $imagePath = $brand->image_name;

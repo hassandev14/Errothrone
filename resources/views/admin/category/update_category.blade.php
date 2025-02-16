@@ -21,11 +21,6 @@
                             aria-required="true" aria-invalid="false"
                             value="{{ old('name', $category->name) }}">
                     </div>
-                    <div class="form-group">
-                        <label for="cc-payment" class="control-label mb-1">Sorting Order</label>
-                        <input type="number" name="sort_order" class="form-control" 
-                        value="{{ old('name', $category->sort_order) }}" required>
-                    </div>
                     <div>
                         <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                             <span id="payment-button-amount">Update Category</span>

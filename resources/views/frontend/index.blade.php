@@ -20,16 +20,6 @@
         object-fit: cover;
         z-index: 0;
     }
-    .banner::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-    }
     .banner-content {
     position: absolute;
     top: 50%;
@@ -42,27 +32,6 @@
     font-weight: bold;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Adds a shadow for better readability */
 	}
-
-	.banner-content h1 {
-		font-size: 36px;
-		margin-bottom: 10px;
-	}
-
-	.banner-content p {
-		font-size: 18px;
-		margin-top: 5px;
-		opacity: 0.9;
-	}
-
-    .banner h1 {
-        font-size: 3rem;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-    .banner p {
-        font-size: 1.2rem;
-        margin-bottom: 20px;
-    }
     .btn-theme {
         background: #ff6600;
         color: white;
@@ -76,6 +45,70 @@
     .btn-theme:hover {
         background: #cc5200;
     }
+
+	body{
+	background-color: #eee;
+	}
+	.container{
+	width: 900px;
+	}
+
+	.card{
+	background-color: #fff;
+	border:none;
+	border-radius: 10px;
+	width: 190px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+
+	.image-container{
+	position: relative;
+	}
+
+	.thumbnail-image{
+	border-radius: 10px !important;
+	}
+
+	.dress-name{
+	font-size: 13px;
+	font-weight: bold;
+	width: 75%;
+	}
+
+	.new-price{
+	font-size: 13px;
+	font-weight: bold;
+	color: rgb(58, 131, 113);
+
+	}
+	.rating-star{
+	font-size: 10px !important;
+	}
+	.rating-number{
+	font-size: 10px;
+	color: grey;
+
+	}
+	.buy{
+	font-size: 12px;
+	color: purple;
+	font-weight: 500;
+	}
+
+	.item-size{
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: #fff;
+	border: 1px solid grey;
+	color: grey;
+	font-size: 10px;
+	text-align: center;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	}
+
 </style>
 <!-- Intro Block -->
  @foreach($banners as $banner)
@@ -98,9 +131,9 @@
 		<p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
 	</header>
 <div class="col-12 p-0 overflow-hidden d-flex flex-wrap">
-    <!-- featureCol -->
+   		 <!-- featureCol -->
 		@foreach($products as $product)
-		<div class="featureCol px-3 mb-6">
+		{{-- <div class="featureCol px-3 mb-6">
 			<div class="border">
 				<div class="imgHolder position-relative w-100 overflow-hidden">
 					<img src="{{ asset($product->image_name) }}" alt="{{ $product->name }}" class="img-fluid w-100">
@@ -116,6 +149,29 @@
 					</span>
 					<span class="price d-block fwEbold">{{ number_format($product->price) }} $</span>
 					<span class="descroption d-block mb-2">{{ $product->short_desc }}</span>
+				</div>
+			</div>
+		</div> --}}
+				                {{-- NEW PRODUCT CARD --}}
+		<div class="col-md-3">
+			<div class="card">
+				<div class="image-container">
+					<div class="first">
+					</div>
+					<img src="https://i.imgur.com/8JIWpnw.jpg" class="img-fluid rounded thumbnail-image">
+				</div>
+				<div class="product-detail-container p-2">
+					<div class="d-flex justify-content-between align-items-center">
+						<h5 class="dress-name">White traditional long dress</h5>
+						<div class="d-flex flex-column mb-2">
+							<span class="new-price">$3.99</span>
+						</div>
+					</div>
+					<div class="d-flex justify-content-between align-items-center pt-1">
+						<div>
+							<span class="rating-number">ONE LINE DESCRIPTION FOR PRODUCT</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -395,57 +451,4 @@
 		</form>
 	</section>
 </div>
-<!-- footerHolder -->
-<aside class="footerHolder container-fluid overflow-hidden px-xl-20 px-lg-14 pt-xl-12 pb-xl-8 pt-lg-12 pt-md-8 pt-10 pb-lg-8">
-	<div class="d-flex flex-wrap flex-lg-nowrap">
-		<div class="coll-1 pr-3 mb-sm-4 mb-3 mb-lg-0">
-			<h3 class="headingVI fwEbold text-uppercase mb-7">Contact Us</h3>
-			<ul class="list-unstyled footerContactList mb-3">
-				<li class="mb-3 d-flex flex-nowrap"><span class="icon icon-place mr-3"></span>
-					<address class="fwEbold m-0">Address: London Oxford Street, 012 United Kingdom.</address>
-				</li>
-				<li class="mb-3 d-flex flex-nowrap"><span class="icon icon-phone mr-3"></span> <span class="leftAlign">Phone : <a href="javascript:void(0);">(+032) 3456 7890</a></span></li>
-				<li class="email d-flex flex-nowrap"><span class="icon icon-email mr-2"></span> <span class="leftAlign">Email: <a href="javascript:void(0);">Botanicalstore@gmail.com</a></span></li>
-			</ul>
-			<ul class="list-unstyled followSocailNetwork d-flex flex-nowrap">
-				<li class="fwEbold mr-xl-11 mr-sm-6 mr-4">Follow us:</li>
-				<li class="mr-xl-6 mr-sm-4 mr-2"><a href="javascript:void(0);" class="fab fa-facebook-f"></a></li>
-				<li class="mr-xl-6 mr-sm-4 mr-2"><a href="javascript:void(0);" class="fab fa-twitter"></a></li>
-				<li class="mr-xl-6 mr-sm-4 mr-2"><a href="javascript:void(0);" class="fab fa-pinterest"></a></li>
-				<li class="mr-2"><a href="javascript:void(0);" class="fab fa-google-plus-g"></a></li>
-			</ul>
-		</div>
-		<div class="coll-2 mb-sm-4 mb-3 mb-lg-0">
-			<h3 class="headingVI fwEbold text-uppercase mb-6">Information</h3>
-			<ul class="list-unstyled footerNavList">
-				<li class="mb-1"><a href="javascript:void(0);">New Products</a></li>
-				<li class="mb-2"><a href="javascript:void(0);">Top Sellers</a></li>
-				<li class="mb-2"><a href="javascript:void(0);">Our Blog</a></li>
-				<li class="mb-2"><a href="javascript:void(0);">About Our Shop</a></li>
-				<li><a href="javascript:void(0);">Privacy policy</a></li>
-			</ul>
-		</div>
-		<div class="coll-3 mb-sm-4 mb-3 mb-lg-0">
-			<h3 class="headingVI fwEbold text-uppercase mb-6">My Account</h3>
-			<ul class="list-unstyled footerNavList">
-				<li class="mb-1"><a href="javascript:void(0);">My account</a></li>
-				<li class="mb-2"><a href="javascript:void(0);">Discount</a></li>
-				<li class="mb-2"><a href="javascript:void(0);">Orders history</a></li>
-				<li><a href="javascript:void(0);">Personal information</a></li>
-			</ul>
-		</div>
-		<div class="coll-4 mb-sm-4 mb-3 mb-lg-0">
-			<h3 class="headingVI fwEbold text-uppercase mb-7 pl-xl-14 pl-lg-10">Popular Tag</h3>
-			<ul class="list-unstyled tagNavList d-flex flex-wrap justify-content-lg-end mb-0">
-				<li class="text-center mb-2 mr-2"><a href="javascript:void(0);" class="md-round d-block py-2 px-2">Trend</a></li>
-				<li class="text-center mb-2"><a href="javascript:void(0);" class="md-round d-block py-2 px-2">Decor</a></li>
-				<li class="text-center mb-2 mr-2"><a href="javascript:void(0);" class="md-round d-block py-2 px-2">Plant</a></li>
-				<li class="text-center mb-2"><a href="javascript:void(0);" class="md-round d-block py-2 px-2">Table tree</a></li>
-				<li class="text-center mb-2 mr-2"><a href="javascript:void(0);" class="md-round d-block py-2 px-2">Bedroom tree</a></li>
-				<li class="text-center mb-2"><a href="javascript:void(0);" class="md-round d-block py-2 px-2">Living room</a></li>
-			</ul>
-		</div>
-	</div>
-</aside>
-</main>
 @include('frontend.footer')

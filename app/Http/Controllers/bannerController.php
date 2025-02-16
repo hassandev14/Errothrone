@@ -20,7 +20,7 @@ class bannerController extends Controller
         $validated = $request->validate([
             'name'  => 'required|string|max:255',
             'desc'  => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
         ]);
 
         if ($request->hasFile('image')) {
@@ -28,7 +28,7 @@ class bannerController extends Controller
             $image = $request->file('image');
 
             // Create a folder path for storing the image inside 'public/admin_images/brands'
-            $folderPath = public_path('admin_images/banners');
+            $folderPath = public_path('storage/admin_images/banners');
 
             // Check if the folder exists, if not, create it
             if (! file_exists($folderPath)) {
@@ -42,7 +42,7 @@ class bannerController extends Controller
             $image->move($folderPath, $imageName);
 
             // Store the relative path of the image in the database (relative to the 'public' directory)
-            $imagePath = 'admin_images/banners/' . $imageName;
+            $imagePath = 'storage/admin_images/banners/' . $imageName;
         } else {
             // If no image is uploaded, set the path to null or handle accordingly
             $imagePath = null;

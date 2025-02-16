@@ -12,9 +12,9 @@ class Category extends Model
         'name',
         'sort_order',
     ];
-    public function brands()
+    public function products()
     {
-        return $this->hasMany(Brand::class, 'category_id');  // The second argument is the foreign key in the brands table
+        return $this->belongsToMany(Product::class);
     }
     public function nav_brands()
     {
@@ -29,8 +29,9 @@ class Category extends Model
     {
         return $this->hasMany(SubCategory::class);
     }
-    public function products()
+    public function brands()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->hasMany(Brand::class, 'category_id');  // The second argument is the foreign key in the brands table
     }
+
 }

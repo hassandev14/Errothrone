@@ -17,8 +17,7 @@ class CategoryController extends Controller
     public function create()
     {
 
-        $lastSortOrder = Category::max('sort_order') ?? 0; // Default 0 if no category exists
-        return view('admin.category.add_category', compact('lastSortOrder'), ['title' => 'Add Category']);
+        return view('admin.category.add_category', ['title' => 'Add Category']);
     }
 
     // Store new category
@@ -26,25 +25,23 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name'       => 'required|string|max:255',
-            'sort_order' => 'nullable|integer',
         ]);
 
-        // Default next sort order fetch karein
-        $sortOrder = $request->sort_order ?? (Category::max('sort_order') + 1);
+        // // Default next sort order fetch karein
+        // $sortOrder = $request->sort_order ?? (Category::max('sort_order') + 1);
 
-        // Agar user sort_order = 1 dal raha hai, to baki categories ka sort_order shift karein
-        if ($sortOrder == 1) {
-            Category::where('sort_order', '>=', 1)->increment('sort_order');
-        } else {
-            // Agar same sort_order exist karta hai to usko adjust karein
-            while (Category::where('sort_order', $sortOrder)->exists()) {
-                $sortOrder++;
-            }
-        }
+        // // Agar user sort_order = 1 dal raha hai, to baki categories ka sort_order shift karein
+        // if ($sortOrder == 1) {
+        //     Category::where('sort_order', '>=', 1)->increment('sort_order');
+        // } else {
+        //     // Agar same sort_order exist karta hai to usko adjust karein
+        //     while (Category::where('sort_order', $sortOrder)->exists()) {
+        //         $sortOrder++;
+        //     }
+        // }
 
         Category::create([
             'name'       => $request->name,
-            'sort_order' => $sortOrder,
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Category added successfully!');
@@ -71,30 +68,28 @@ class CategoryController extends Controller
 
         $request->validate([
             'name'       => 'required|string|max:255',
-            'sort_order' => 'required|integer',
         ]);
 
-        $newSortOrder = $request->sort_order;
-        $oldSortOrder = $category->sort_order;
+        // $newSortOrder = $request->sort_order;
+        // $oldSortOrder = $category->sort_order;
 
-        // Agar sort_order change ho raha hai
-        if ($newSortOrder != $oldSortOrder) {
+        // // Agar sort_order change ho raha hai
+        // if ($newSortOrder != $oldSortOrder) {
 
-            if ($newSortOrder == 1) {
-                // Agar new sort_order = 1 hai, to baki categories ko shift karein
-                Category::where('sort_order', '>=', 1)->increment('sort_order');
-            } else {
-                // Agar koi category is new sort_order par exist karti hai, to adjust karein
-                while (Category::where('sort_order', $newSortOrder)->exists()) {
-                    $newSortOrder++;
-                }
-            }
-        }
+        //     if ($newSortOrder == 1) {
+        //         // Agar new sort_order = 1 hai, to baki categories ko shift karein
+        //         Category::where('sort_order', '>=', 1)->increment('sort_order');
+        //     } else {
+        //         // Agar koi category is new sort_order par exist karti hai, to adjust karein
+        //         while (Category::where('sort_order', $newSortOrder)->exists()) {
+        //             $newSortOrder++;
+        //         }
+        //     }
+        // }
 
         // Category update karein
         $category->update([
             'name'       => $request->name,
-            'sort_order' => $newSortOrder,
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully!');

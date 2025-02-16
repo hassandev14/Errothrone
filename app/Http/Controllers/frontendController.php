@@ -8,15 +8,26 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Banner;
+use App\Models\OrderItem;
+use App\Models\AttributeCategory;
+use Illuminate\Support\Facades\DB;
 
 class frontendController extends Controller
 {
     public function index()
     {
         $products = Product::all();
+        // $products = Product::select('products.*')
+        // ->join('order_items', 'products.id', '=', 'order_items.product_id')
+        // ->selectRaw('COUNT(order_items.product_id) as order_count')
+        // ->groupBy('products.id')
+        // ->orderByDesc('order_count')
+        // ->take(4) // ✅ Get only top 4 products
+        // ->get();    
         $banners = Banner::all();
-        $categories = Category::with(['subcategories','brands'])->orderBy('sort_order', 'ASC')->get();
-        return view('frontend.index',compact('products', 'categories', 'banners') ,['title' => 'Errothrone Internationol']);
+        //$categories = Category::with(['subcategories','brands'])->get();
+        $attributeCategories = AttributeCategory::with(['categories', 'attribute', 'subCategories', 'brands'])->get();
+        return view('frontend.index',compact('products', 'attributeCategories', 'banners') ,['title' => 'Errothrone Internationol']);
     }
     public function about()
     {

@@ -2,258 +2,191 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title }}</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
-
+    <title>{{$title}}</title>
     <!-- Bootstrap & FontAwesome -->
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/fontawesome.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/color.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
-<style>
-    /* ==========================
-    🌟 Global Styles
-    ========================== */
-    .nav-link.active {
-        color: green !important;
-    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('frontend/css/custom_style.css') }}"> <!-- Link to external CSS -->
+    <script src="{{ asset('frontend/js/script.js') }}" defer></script> <!-- Link to external JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
 
-    body {
-        font-family: 'Roboto', sans-serif;
-        color: #333;
-        background-color: #f8f9fa;
-        margin: 0;
-        padding: 0;
-    }
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            transition: width 0.3s;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
 
-    /* ==========================
-    ✅ Top Header (Black & Gold)
-    ========================== */
-    .top-header {
-    font-size: 12px;
-    background-color: #000000; /* Pure Black */
-    color: #FFD700; /* Gold */
-    padding: 5px 0;
-    text-align: right;
-    }
+        .nav-link:hover::after {
+            width: 100%;
+        }
 
-    .top-header a {
-    color: #FFD700; 
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-left: 15px;
-    transition: 0.3s;
-    }
+        .dropdown-menu {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(-10px);
+        }
 
-    .top-header a:hover {
-    color: #ffffff;
-    }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    /* ==========================
-    ✅ Main Header (Modern Look)
-    ========================== */
-    #header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: #003366; /* Navy Blue */
-    padding: 10px 0;
-    border-bottom: 3px solid #FFD700;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    }
+        .dropdown-menu a {
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-    .navbar-brand img {
-    max-height: 60px;
-    }
+        .dropdown-menu a:hover {
+            background-color: #3dbc1a;
+            color: #fff;
+        }
 
-    .navbar-nav .nav-link {
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 14px;
-    padding: 10px 15px;
-    transition: all 0.3s ease;
-    }
+        .navbar-nav .nav-link:hover {
+            color: #96cf85 !important;
+            border-bottom: 2px solid #ffc107;
+        }
 
-    .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
-    color: #FFD700;
-    font-weight: bold;
-    }
+        .navbar-brand {
+            font-size: 1.5rem;
+        }
 
-    /* ==========================
-    ✅ Categories Navbar (Premium)
-    ========================== */
-    .category-navbar {
-    background: #004d00; /* Dark Green */
-    padding: 10px 0;
-    font-weight: 700;
-    box-shadow: 0px 2px 5px rgba(92, 53, 53, 0.2);
-    }
+        .input-group input::placeholder {
+            color: #aaa;
+        }
 
-    .category-navbar .nav-link {
-    color: #ffffff;
-    text-transform: uppercase;
-    padding: 12px 15px;
-    font-size: 14px;
-    transition: 0.3s ease-in-out;
-    }
+        .input-group-text:hover {
+            background-color: #e0a800 !important;
+        }
 
-    .category-navbar .nav-link:hover {
-    color: #FFD700; /* Gold */
-    }
+        a {
+            font-size: 14px;
+            font-weight: 700
+        }
 
-    /* ==========================
-    ✅ Dropdown Styling
-    ========================== */
-    .category-navbar .dropdown-menu {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    min-width: 220px;
-    animation: fadeIn 0.3s ease-in-out;
-    }
+        .superNav {
+            font-size: 13px;
+        }
 
-    .category-navbar .dropdown-item {
-    color: #333;
-    padding: 10px 15px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: 0.3s ease-in-out;
-    border-radius: 5px;
-    }
+        .form-control {
+            outline: none !important;
+            box-shadow: none !important;
+        }
 
-    .category-navbar .dropdown-item:hover {
-    background-color: #FFD700;
-    color: black;
-    }
-
-    /* ==========================
-    ✅ Button Styling
-    ========================== */
-    .btn-primary {
-    background: #FFD700;
-    color: black;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: 0.3s;
-    }
-
-    .btn-primary:hover {
-    background: #FFC107;
-    color: black;
-    }
-
-    /* ==========================
-    ✅ Footer Styling
-    ========================== */
-    .footer {
-    background: #222;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    }
-
-    /* ==========================
-    ✅ Animations
-    ========================== */
-    @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    }
-</style>
+        @media screen and (max-width:540px) {
+            .centerOnMobile {
+                text-align: center
+            }
+        }
+        /* Subcategory ke liye dark color aur bold text */
+        .subcategory {
+            font-weight: bold;
+            color: black;
+        }
+    
+        /* Brand ke liye halka (dim) color */
+        .brand {
+            color: rgb(45, 44, 44);
+        }
+    </style>
 </head>
-
 <body>
-<!-- Top Header for Flags & Info -->
-<div class="top-header bg-black text-white py-1 border-bottom">
-    <div class="container d-flex justify-content-end">
-        <div class="language-switcher">
-            <a href="#"><img src="{{ asset('images/flags/en.png') }}" alt="English" width="20"></a>
-            <a href="#"><img src="{{ asset('images/flags/fr.png') }}" alt="French" width="20"></a>
+    <div class="superNav border-bottom py-2 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 centerOnMobile">
+                    <select class="me-3 border-0 bg-light">
+                        <option value="en-us">EN-US</option>
+                    </select>
+                    <span class="d-none d-lg-inline-block d-md-inline-block d-sm-inline-block d-xs-none me-3"><strong>info@somedomain.com</strong></span>
+                    <span class="me-3"><i class="fa-solid fa-phone me-1 text-warning"></i> <strong>1-800-123-1234</strong></span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 d-none d-lg-block d-md-block-d-sm-block d-xs-none text-end">
+                    <span class="me-3"><i class="fa-solid fa-truck text-muted me-1"></i><a class="text-muted" href="#">Shipping</a></span>
+                    <span class="me-3"><i class="fa-solid fa-file  text-muted me-2"></i><a class="text-muted" href="#">Policy</a></span>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<!-- Main Header -->
-<header id="header" class="shadow-sm bg-white py-2">
-    <div class="container d-flex justify-content-between align-items-center">
-        <!-- Logo -->
-        <a href="/" class="navbar-brand d-flex align-items-center">
-            <img src="{{ asset('images/logo.png') }}" alt="Botanical" class="img-fluid" style="max-height: 50px;">
-        </a>
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light p-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning" href="#">
+                <img src="{{ asset('frontend/images/naturali import web logo-02.png') }}" alt="Logo" style="height: 85px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto text-uppercase fw-semibold">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="ms-auto d-lg-flex" style="flex: 1 1 70%;">
+                    <div class="input-group" style="width: 100%; height: 40px;">
+                        <input type="text" class="form-control border-warning rounded-start" placeholder="Search..." style="color:#7a7a7a; height: 40px;">
+                        <span class="input-group-text bg-warning text-white rounded-end" style="height: 40px;"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    </div>
+                </div>
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-uppercase fw-semibold text-dark" href="#"><i class="fa-solid fa-cart-shopping me-1"></i>Cart</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('store') ? 'active' : '' }}" href="{{ route('store') }}">Store</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-uppercase fw-semibold text-dark" href="#"><i class="fa-solid fa-circle-user me-1"></i>Account</a>
                     </li>
                 </ul>
             </div>
-        </nav>
-    </div>
-</header>
+        </div>
+    </nav>
 
-<!-- Adjusted Navbar Height -->
-<nav class="category-navbar">
-    <div class="container">
-        <ul class="nav justify-content-center">
-        @foreach($categories as $category)
-            @if($category->subcategories->isNotEmpty() || $category->brands->isNotEmpty())
+    <nav class="navbar navbar-expand-custom navbar-mainbg sticky-top">
+        {{-- <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars text-white"></i>
+        </button> --}}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                
+                <!-- Loop through categories for dropdown -->
+                @foreach($attributeCategories as $attributeCategory)
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{{ route('category.show', ['name' => $category->name]) }}" data-toggle="dropdown">
-                        {{ $category->name }}
+                    <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown{{ $attributeCategory->id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="far fa-clone"></i> {{ $attributeCategory->attribute->name ?? 'N/A' }}
                     </a>
-                    <div class="dropdown-menu">
-                        @if($category->subcategories->isNotEmpty())
-                            @foreach($category->subcategories as $subcategory)
-                                <a class="dropdown-item" href="{{ route('subcategory.show', ['name' => $subcategory->name]) }}">{{ $subcategory->name }}</a>
-                            @endforeach
-                        @endif
-
-                        @if($category->brands->isNotEmpty())
-                            <div class="dropdown-divider"></div>
-                            @foreach($category->brands as $brand)
-                                <a class="dropdown-item" href="{{$brand->name}}">{{ $brand->name }}</a>
-                            @endforeach
-                        @endif
-                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="categoryDropdown{{ $attributeCategory->id }}">
+                        <!-- Category -->
+                        <li>
+                            <a class="dropdown-item subcategory" href="#"><strong>{{ $attributeCategory->categories->name }}</strong></a>
+                        </li>
+                        <!-- Subcategories -->
+                        @foreach($attributeCategory->subCategories as $subCategory)
+                        <li>
+                            <a class="dropdown-item brand" href="#">{{ $subCategory->name }}</a>
+                        </li>
+                        @endforeach
+                    </ul>
                 </li>
-            @else
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('category.show', ['name' => $category->name]) }}">{{ $category->name }}</a>
-                </li>
-            @endif
-        @endforeach
-        </ul>
-    </div>
-</nav>
-<main>
+                @endforeach
+            </ul>
+        </div>
+    </nav>
+    
