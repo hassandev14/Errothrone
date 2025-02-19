@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Category extends Model
 {
@@ -12,6 +13,11 @@ class Category extends Model
         'name',
         'sort_order',
     ];
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'attribute_category', 'category_id', 'attribute_id');
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class);

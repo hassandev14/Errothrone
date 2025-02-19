@@ -17,7 +17,7 @@ use App\Http\Controllers\stockController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\bannerController;
 use App\Http\Controllers\frontendController;
-use App\Http\Controllers\whyChoseUsController;
+use App\Http\Controllers\attributeController;
 
 Route::get('/', [frontendController::class, 'index'])->name('home');
 Route::get('/about', [frontendController::class, 'about'])->name('about');
@@ -87,9 +87,11 @@ Route::get('/banner/{id}/edit', [bannerController::class, 'edit'])->name('banner
 Route::put('/banner/{id}', [bannerController::class, 'update'])->name('banners.update');
 Route::get('/banner/{id}', [bannerController::class, 'destroy'])->name('banners.delete');
 ///////////////////////////////////////////////// WHY CHOSE US ROUTES   //////////////////////////////////////////////////////////
-Route::get('/chose_us', [whyChoseUsController::class, 'index'])->name('chose_us.index');
-Route::get('/chose_us/create', [whyChoseUsController::class, 'create'])->name('chose_us.create');
-Route::post('/chose_us', [whyChoseUsController::class, 'store'])->name('chose_us.store');
-Route::get('/chose_us/{id}/edit', [whyChoseUsController::class, 'edit'])->name('chose_us.edit');
-Route::put('/chose_us/{id}', [whyChoseUsController::class, 'update'])->name('chose_us.update');
+Route::get('/attribute', [attributeController::class, 'index'])->name('attributes.index');
+Route::get('/attribute/create', [attributeController::class, 'create'])->name('attributes.create');
+Route::post('/attribute', [attributeController::class, 'store'])->name('attributes.store');
+Route::get('/attribute/{id}/edit', [attributeController::class, 'edit'])->name('attributes.edit');
+Route::put('/attribute/{id}', [attributeController::class, 'update'])->name('attributes.update');
+Route::get('/attribute/{id}', [attributeController::class, 'destroy'])->name('attributes.delete');
+
 // });

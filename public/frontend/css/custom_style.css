@@ -18,6 +18,7 @@ i {
 .navbar-mainbg{
 	background-color: #50a163;
 	padding: 0px;
+	height: 40px;
 }
 #navbarSupportedContent{
 	overflow: hidden;
@@ -63,80 +64,78 @@ i {
 	transform: rotate(90deg);
 }
 .hori-selector{
-	display:inline-block;
-	position:absolute;
-	height: 100%;
-	top: 0px;
-	left: 0px;
-	transition-duration:0.6s;
-	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-	background-color: #fff;
-	border-top-left-radius: 15px;
-	border-top-right-radius: 15px;
-	margin-top: 10px;
+    display:inline-block;
+    position:absolute;
+    height: 10%; /* Adjusted height */
+    top: 0px;
+    left: 0px;
+    transition-duration:0.6s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background-color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-top: 10px;
+    transition: all 0.3s ease; /* Add smooth transition */
 }
 .hori-selector .right,
 .hori-selector .left{
-	position: absolute;
-	width: 25px;
-	height: 25px;
-	background-color: #fff;
-	bottom: 10px;
+    position: absolute;
+    width: 15px; /* Reduced width */
+    height: 15px; /* Reduced height */
+   
+    bottom: 10px;
 }
 .hori-selector .right{
-	right: -25px;
+    right: -15px; /* Adjusted position */
 }
+
 .hori-selector .left{
-	left: -25px;
+    left: -15px; /* Adjusted position */
 }
 .hori-selector .right:before,
 .hori-selector .left:before{
-	content: '';
+    content: '';
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 4px; /* Reduced width */
+    height: 10px; /* Reduced height */
     border-radius: 50%;
     background-color: #50a163;
 }
 .hori-selector .right:before{
-	bottom: 0;
-    right: -25px;
+    bottom: 0;
+    right: -15px; /* Adjusted position */
 }
+
 .hori-selector .left:before{
-	bottom: 0;
-    left: -25px;
+    bottom: 0;
+    left: -15px; /* Adjusted position */
 }
 /* Ensure the dropdown menu is hidden by default */
 .dropdown-menu {
     display: none;
     position: absolute;
-    top: -50px; /* Move the dropdown above the navbar */
+    top: -40px; /* Slightly adjusted top */
     left: 0;
     z-index: 1000;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    margin-top: 5px; /* Adjust the space between navbar and dropdown */
+    margin-top: 5px; /* Adjust space */
 }
 
-/* Display the dropdown menu when hovering the parent */
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
 }
 
-/* Optional: Adjust dropdown item style */
 .dropdown-item {
-    padding: 10px;
+    padding: 8px 10px; /* Adjust padding for smaller size */
     display: flex;
     align-items: center;
 }
 
-/* Make the image size consistent */
 .dropdown-item img {
-    width: 50px;
-    height: 50px;
+    width: 45px; /* Adjusted size */
+    height: 45px; /* Adjusted size */
     margin-right: 10px;
 }
-
-
 @media(min-width: 992px){
 	.navbar-expand-custom {
 	    -ms-flex-flow: row nowrap;
@@ -158,36 +157,153 @@ i {
 	    flex-basis: auto;
 	}
 }
-
-
 @media (max-width: 991px){
-	#navbarSupportedContent ul li a{
-		padding: 12px 30px;
-	}
+    #navbarSupportedContent ul li a{
+        padding: 10px 25px; /* Adjusted padding */
+    }
 	.hori-selector{
-		margin-top: 0px;
-		margin-left: 10px;
-		border-radius: 0;
-		border-top-left-radius: 25px;
-		border-bottom-left-radius: 25px;
-	}
-	.hori-selector .left,
-	.hori-selector .right{
-		right: 10px;
-	}
-	.hori-selector .left{
-		top: -25px;
-		left: auto;
-	}
-	.hori-selector .right{
-		bottom: -25px;
-	}
-	.hori-selector .left:before{
-		left: -25px;
-		top: -25px;
-	}
-	.hori-selector .right:before{
-		bottom: -25px;
-		left: -25px;
-	}
+        margin-top: 0px;
+        margin-left: 10px;
+        border-radius: 0;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+    }
+
+    .hori-selector .left,
+    .hori-selector .right{
+        right: 10px;
+    }
+
+    .hori-selector .left{
+        top: -20px;
+        left: auto;
+    }
+
+    .hori-selector .right{
+        bottom: -20px;
+    }
+
+    .hori-selector .left:before{
+        left: -20px;
+        top: -20px;
+    }
+
+    .hori-selector .right:before{
+        bottom: -20px;
+        left: -20px;
+    }
 }
+.navbar{
+    margin-top: -12px;
+    height: 100px;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Main Styles */
+.navbar-mainbg {
+    background-color: #50a163;
+    height: 60px; /* Increased Height */
+    padding: 0 15px; /* Added Padding */
+}
+
+.navbar {
+    position: relative;
+    z-index: 1000; /* Ensures Navbar Stays Above Other Content */
+    margin-top: 0px !important; /* Fixed Margin */
+}
+
+/* Nav Items */
+#navbarSupportedContent ul {
+    padding: 0;
+    margin: 0;
+}
+
+#navbarSupportedContent ul li {
+    list-style: none;
+    float: left;
+}
+
+#navbarSupportedContent ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    padding: 15px 20px; /* Adjusted Padding */
+    transition: all 0.3s ease-in-out;
+    color: white;
+}
+
+#navbarSupportedContent ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+/* Active Nav Item */
+#navbarSupportedContent ul li.active a {
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: #ffffff;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    color: #333;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5;
+}
+
+/* Search Bar Fix */
+.search-container {
+    flex: 1;
+    max-width: 500px;
+}
+
+.search-container .input-group {
+    width: 100%;
+}
+
+/* Responsive Navbar */
+@media (max-width: 991px) {
+    .navbar-mainbg {
+        height: auto; /* Fixes height on small screens */
+    }
+
+    #navbarSupportedContent ul li {
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+
+    .dropdown-menu {
+        position: static;
+        display: none;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .nav-item.dropdown:hover .dropdown-menu {
+        display: block;
+    }
+}
+
+

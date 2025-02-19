@@ -11,6 +11,19 @@
                     <a class="js-arrow" href="/">
                         <i class="fas fa-chart-line"></i>Dashboard</a>
                 </li>
+                <!-- ATTRIBUTE LINKS -->
+                <li class="active has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-cogs"></i>Navbar Name</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="{{ route('attributes.index') }}">Navbar name List</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('attributes.create') }}">Add Navbar Name</a>
+                        </li>
+                    </ul>
+                </li>
                 <!-- CATEGORY LINKS -->
                 <li class="active has-sub">
                     <a class="js-arrow" href="#">

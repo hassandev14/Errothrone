@@ -32,6 +32,8 @@ class ProductsController extends Controller
             'name'               => 'required|string|max:255',
             'description'        => 'required',
             'short_desc'         => 'required',
+            'origin'             => 'required',
+            'product_code'       => 'required',
             'price'              => 'required|numeric',
             'brand_ids'          => 'array',
             'brand_ids.*'        => 'exists:brands,id',
@@ -73,6 +75,8 @@ class ProductsController extends Controller
             'price'       => $validated['price'],
             'description' => $validated['description'],
             'short_desc' => $validated['short_desc'],
+            'origin'      => $validated['origin'],
+            'product_code' => $validated['product_code'],
             'image_name'  => $imagePath,
         ]);
 
@@ -124,10 +128,13 @@ class ProductsController extends Controller
     {
         $validated = $request->validate([
             'name'               => 'required|string|max:255',
+            'short_desc'         => 'required',
+            'origin'             => 'required',
+            'product_code'       => 'required',
             'category_ids'       => 'required|array',       
             'category_ids.*'     => 'exists:categories,id', 
             'sub_category_ids'   => 'nullable|array',
-            'sub_category_ids.*' => 'exists:sub_categories,id', // Table name correct karein
+            'sub_category_ids.*' => 'exists:sub_category,id', // Table name correct karein
             'brand_ids'          => 'nullable|array', // Brand optional hai
             'brand_ids.*'        => 'exists:brands,id',
             'price'              => 'required|numeric|min:0',
@@ -160,6 +167,8 @@ class ProductsController extends Controller
             'price'       => $validated['price'],
             'description' => $validated['description'],
             'short_desc' => $validated['short_desc'],
+            'origin'      => $validated['origin'],
+            'product_code' => $validated['product_code'],
             'image_name'  => $imagePath,
         ]);
     

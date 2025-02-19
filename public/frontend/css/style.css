@@ -2414,16 +2414,16 @@ a {
   float: left;
 }
 
-.pageNav1 .navbar-nav li.dropdown.show > .dropdown-menu {
+.pageNav1 .-nav li.dropdown.show > .dropdown-menu {
   opacity: 1;
   visibility: visible;
 }
 
-.pageNav1 .navbar-nav .nLogo {
+.pageNav1 .-nav .nLogo {
   display: none;
 }
 
-.pageNav1 .navbar-nav a {
+.pageNav1 .-nav a {
   color: #333333;
   padding: 10px 15px;
   background: none;
@@ -2433,11 +2433,11 @@ a {
   transition: color 0.3s ease;
 }
 
-.pageNav1 .navbar-nav a:after {
+.pageNav1 .-nav a:after {
   display: none;
 }
 
-.pageNav1 .navbar-nav .dropdown-menu {
+.pageNav1 .-nav .dropdown-menu {
   font-size: 16px;
   line-height: 18px;
   opacity: 0;
@@ -2452,18 +2452,18 @@ a {
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.06);
 }
 
-.pageNav1 .navbar-nav .dropdown-menu a {
+.pageNav1 .-nav .dropdown-menu a {
   color: #444444;
   display: block;
   padding: 10px 15px;
   margin: 0;
 }
 
-.pageNav1 .navbar-nav .dropdown-menu a:hover {
+.pageNav1 .-nav .dropdown-menu a:hover {
   color: #fff;
 }
 
-.pageNav1 .navbar-toggle {
+.pageNav1 .-toggle {
   padding: 8px;
   background: none;
   border: 1px solid #333333;
@@ -2474,15 +2474,15 @@ a {
   transition: all 0.25s linear;
 }
 
-.pageNav1 .navbar-toggle:focus {
+.pageNav1 .-toggle:focus {
   outline: 0;
 }
 
-.pageNav1 .navbar-toggle:hover .icon-bar {
+.pageNav1 .-toggle:hover .icon-bar {
   background: #fff;
 }
 
-.pageNav1 .navbar-toggle .icon-bar {
+.pageNav1 .-toggle .icon-bar {
   display: block;
   width: 22px;
   height: 2px;
@@ -2490,11 +2490,11 @@ a {
   border-radius: 1px;
 }
 
-.pageNav1 .navbar-toggle .icon-bar + .icon-bar {
+.pageNav1 .-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
 
-.pageNav1 .navbar-collapse {
+.pageNav1 .-collapse {
   position: absolute;
   left: 0;
   top: 100%;
@@ -2510,12 +2510,12 @@ a {
   float: right;
 }
 
-.pageNav2 .navbar-nav li.dropdown.show > .dropdown-menu {
+.pageNav2 .-nav li.dropdown.show > .dropdown-menu {
   opacity: 1;
   visibility: visible;
 }
 
-.pageNav2 .navbar-nav .dropdown-menu {
+.pageNav2 .-nav .dropdown-menu {
   font-size: 16px;
   line-height: 18px;
   opacity: 0;
@@ -2531,28 +2531,28 @@ a {
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.06);
 }
 
-.pageNav2 .navbar-nav .dropdown-menu a {
+.pageNav2 .-nav .dropdown-menu a {
   color: #444444;
   display: block;
   padding: 10px 15px;
   margin: 0;
 }
 
-.pageNav2 .navbar-nav .dropdown-menu a:after {
+.pageNav2 .-nav .dropdown-menu a:after {
   display: none;
 }
 
-.pageNav2 .navbar-nav .dropdown-menu a:hover {
+.pageNav2 .-nav .dropdown-menu a:hover {
   color: #fff;
 }
 
-.pageNav2 .navbar-nav .active > a:after {
+.pageNav2 .-nav .active > a:after {
   -webkit-transform: scaleX(1);
   -ms-transform: scaleX(1);
   transform: scaleX(1);
 }
 
-.pageNav2 .navbar-nav a {
+.pageNav2 .-nav a {
   color: #333333;
   padding: 10px 15px;
   -webkit-transition: color 0.3s ease;
@@ -2562,7 +2562,7 @@ a {
   cursor: pointer;
 }
 
-.pageNav2 .navbar-nav a:after {
+.pageNav2 .-nav a:after {
   content: '';
   position: absolute;
   top: auto;
@@ -2571,7 +2571,7 @@ a {
   left: 0;
 }
 
-.pageNav2 .navbar-nav a:after {
+.pageNav2 .-nav a:after {
   -webkit-transition: all 0.25s linear;
   -o-transition: all 0.25s linear;
   transition: all 0.25s linear;
@@ -2585,13 +2585,13 @@ a {
   transform-origin: 50% 100% 0;
 }
 
-.pageNav2 .navbar-nav a:hover:after {
+.pageNav2 .-nav a:hover:after {
   -webkit-transform: scaleX(1);
   -ms-transform: scaleX(1);
   transform: scaleX(1);
 }
 
-.pageNav2 .navbar-toggle {
+.pageNav2 .-toggle {
   padding: 8px;
   background: none;
   border: 1px solid #333333;
@@ -2601,15 +2601,15 @@ a {
   transition: all 0.25s linear;
 }
 
-.pageNav2 .navbar-toggle:focus {
+.pageNav2 .-toggle:focus {
   outline: 0;
 }
 
-.pageNav2 .navbar-toggle:hover .icon-bar {
+.pageNav2 .-toggle:hover .icon-bar {
   background: #fff;
 }
 
-.pageNav2 .navbar-toggle .icon-bar {
+.pageNav2 .-toggle .icon-bar {
   display: block;
   width: 22px;
   height: 2px;
@@ -2617,11 +2617,11 @@ a {
   border-radius: 1px;
 }
 
-.pageNav2 .navbar-toggle .icon-bar + .icon-bar {
+.pageNav2 .-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
 
-.pageNav2 .navbar-collapse {
+.pageNav2 .-collapse {
   position: absolute;
   left: 0;
   top: 100%;

@@ -1,30 +1,34 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Attribute;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
     // List all categories
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::with('attributes')->get();
+                
         return view('admin.category.category', compact('categories'), ['title' => 'Category']);
     }
 
     // Show add category form
     public function create()
     {
-
-        return view('admin.category.add_category', ['title' => 'Add Category']);
+        $attributes = Attribute::all();
+        return view('admin.category.add_category', compact('attributes'), ['title' => 'Add Category']);
     }
 
     // Store new category
     public function store(Request $request)
     {
         $request->validate([
-            'name'       => 'required|string|max:255',
+            'name'            => 'required|string|max:255',
+            'attribute_ids.*' => 'exists:attributes,id',
         ]);
 
         // // Default next sort order fetch karein
@@ -40,21 +44,31 @@ class CategoryController extends Controller
         //     }
         // }
 
-        Category::create([
-            'name'       => $request->name,
+        $category = Category::create([
+            'name' => $request->name,
         ]);
-
+        
+        $categoryId = $category->id;
+        DB::table('attribute_category')->insert([
+            'category_id'  => $categoryId,
+            'attribute_id' => $request['attribute_ids'][0] ?? null, // NULL if brand not selected
+            'created_at'   => now(),
+            'updated_at'   => now(),
+        ]);
         return redirect()->route('categories.index')->with('success', 'Category added successfully!');
     }
 
     // Show edit form
     public function edit($id)
     {
-        $category = Category::find($id);
-        if (! $category) {
-            return redirect()->route('categories.index')->with('error', 'Category not found!');
-        }
-        return view('admin.category.update_category', compact('category'), ['title' => 'Edit Category']);
+        $category = Category::findOrFail($id);
+        $attributes = DB::table('attributes')->get(); // Fetch all attributes
+        $selectedAttributes = DB::table('attribute_category')
+                                ->where('category_id', $id)
+                                ->pluck('attribute_id')
+                                ->toArray();
+
+        return view('admin.category.update_category', compact('category', 'attributes', 'selectedAttributes'),['title' => 'Update Category']);
     }
 
     // Update category
@@ -67,7 +81,7 @@ class CategoryController extends Controller
         }
 
         $request->validate([
-            'name'       => 'required|string|max:255',
+            'name' => 'required|string|max:255',
         ]);
 
         // $newSortOrder = $request->sort_order;
@@ -89,7 +103,7 @@ class CategoryController extends Controller
 
         // Category update karein
         $category->update([
-            'name'       => $request->name,
+            'name' => $request->name,
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully!');

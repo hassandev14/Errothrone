@@ -1,183 +1,197 @@
 @include('frontend.header')
 <style>
-    .banner {
-        position: relative;
-        width: 100%;
-        height: 500px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-        overflow: hidden;
-    }
-    .banner img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
-    }
-    .banner-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    max-width: 700px;
-    text-align: center;
-    color: white; /* White text for better contrast */
-    font-weight: bold;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Adds a shadow for better readability */
-	}
-    .btn-theme {
-        background: #ff6600;
-        color: white;
-        padding: 12px 30px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        display: inline-block;
-    }
-    .btn-theme:hover {
-        background: #cc5200;
-    }
-
-	body{
-	background-color: #eee;
-	}
-	.container{
-	width: 900px;
+	.banner {
+		position: relative;
+		width: 100%;
+		min-height: 70vh; /* Using vh to make the height relative to the viewport */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		color: white;
+		overflow: hidden;
+		background: url('your-image.jpg') center/cover no-repeat;
 	}
 
-	.card{
-	background-color: #fff;
-	border:none;
-	border-radius: 10px;
-	width: 190px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	.banner img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover; /* Ensure the image covers the entire container */
+		z-index: 0;
 	}
 
-	.image-container{
-	position: relative;
+	.banner-content {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 2;
+		max-width: 90%;
+		text-align: center;
+		color: white;
+		font-weight: bold;
+		text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 	}
 
-	.thumbnail-image{
-	border-radius: 10px !important;
+	/* Responsive Styling */
+	@media screen and (max-width: 768px) {
+		.banner {
+			min-height: 40vh; /* Reduced height for tablets */
+		}
+
+		.banner-content {
+			font-size: 16px; /* Larger text for better readability */
+			padding: 15px;
+		}
 	}
 
-	.dress-name{
-	font-size: 13px;
-	font-weight: bold;
-	width: 75%;
+	@media screen and (max-width: 480px) {
+		.banner {
+			min-height: 30vh; /* Even smaller for mobile screens */
+		}
+
+		.banner-content {
+			font-size: 14px; /* Smaller text for mobile */
+			padding: 10px;
+		}
+	}
+	/* Additional rule to prevent image zoom and keep it within bounds for larger screens */
+	@media screen and (min-width: 1024px) {
+		.banner img {
+			object-fit:fill; /* This will ensure the entire image is visible without cropping */
+		}
+	}
+	.btn-theme {
+		background: #ff6600;
+		color: white;
+		padding: 12px 30px;
+		border-radius: 30px;
+		text-decoration: none;
+		font-weight: bold;
+		transition: all 0.3s ease;
+		display: inline-block;
 	}
 
-	.new-price{
-	font-size: 13px;
-	font-weight: bold;
-	color: rgb(58, 131, 113);
-
-	}
-	.rating-star{
-	font-size: 10px !important;
-	}
-	.rating-number{
-	font-size: 10px;
-	color: grey;
-
-	}
-	.buy{
-	font-size: 12px;
-	color: purple;
-	font-weight: 500;
+	.btn-theme:hover {
+		background: #cc5200;
 	}
 
-	.item-size{
-	width: 15px;
-	height: 15px;
-	border-radius: 50%;
-	background: #fff;
-	border: 1px solid grey;
-	color: grey;
-	font-size: 10px;
-	text-align: center;
-	align-items: center;
-	display: flex;
-	justify-content: center;
+	body {
+		background-color: #eee;
 	}
 
+	.container {
+		width: 900px;
+	}
+
+	.card {
+		background-color: #fff;
+		border: none;
+		border-radius: 10px;
+		width: 190px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+
+	.image-container {
+		position: relative;
+	}
+
+	.thumbnail-image {
+		border-radius: 10px !important;
+	}
+
+	.dress-name {
+		font-size: 13px;
+		font-weight: bold;
+		width: 75%;
+	}
+
+	.new-price {
+		font-size: 13px;
+		font-weight: bold;
+		color: rgb(58, 131, 113);
+	}
+
+	.rating-star {
+		font-size: 10px !important;
+	}
+
+	.rating-number {
+		font-size: 10px;
+		color: grey;
+	}
+
+	.buy {
+		font-size: 12px;
+		color: purple;
+		font-weight: 500;
+	}
+
+	.item-size {
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		background: #fff;
+		border: 1px solid grey;
+		color: grey;
+		font-size: 10px;
+		text-align: center;
+		align-items: center;
+		display: flex;
+		justify-content: center;
+	}
 </style>
+
 <!-- Intro Block -->
- @foreach($banners as $banner)
+@foreach($banners as $banner)
 <section class="introBlock position-relative">
     <div class="banner">
-        <img src="{{ asset( $banner->image) }}" alt="Banner Image">
-        <!-- <div class="banner-content">
-            <h1>{{$banner->name}}</h1>
-            <p>{{$banner->desc}}.</p>
-        </div> -->
+        <img src="{{ asset($banner->image) }}" alt="Banner Image">
+        <div class="banner-content">
+            {{-- <h1>{{$banner->name}}</h1>
+            <p>{{$banner->desc}}</p> --}}
+        </div>
     </div>
 </section>
 @endforeach
+
 <!-- featureSec -->
 <section class="featureSec container-fluid overflow-hidden pt-xl-12 pt-lg-10 pt-md-80 pt-5 pb-xl-10 pb-lg-4 pb-md-2 px-xl-14 px-lg-7">
 	<!-- mainHeader -->
 	<header class="col-12 mainHeader mb-7 text-center">
 		<h1 class="headingIV playfair fwEblod mb-4">Featured Product</h1>
-		<span class="headerBorder d-block mb-md-5 mb-3"><img src="{{ asset('frontend/images/hbdr.png') }}" alt="Header Border" class="img-fluid img-bdr"></span>
 		<p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
 	</header>
-<div class="col-12 p-0 overflow-hidden d-flex flex-wrap">
-   		 <!-- featureCol -->
-		@foreach($products as $product)
-		{{-- <div class="featureCol px-3 mb-6">
-			<div class="border">
-				<div class="imgHolder position-relative w-100 overflow-hidden">
-					<img src="{{ asset($product->image_name) }}" alt="{{ $product->name }}" class="img-fluid w-100">
-					<ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
-						<li class="mr-2 overflow-hidden">
-						<a href="product_detail/{{$product->id}}" class="icon-cart d-block"></a>
-						</li>
-					</ul>
-				</div>
-				<div class="text-center py-xl-5 py-sm-4 py-2 px-xl-2 px-1">
-					<span class="title d-block mb-2">
-					{{ $product->name }}
-					</span>
-					<span class="price d-block fwEbold">{{ number_format($product->price) }} $</span>
-					<span class="descroption d-block mb-2">{{ $product->short_desc }}</span>
-				</div>
-			</div>
-		</div> --}}
-				                {{-- NEW PRODUCT CARD --}}
-		<div class="col-md-3">
-			<div class="card">
-				<div class="image-container">
-					<div class="first">
-					</div>
-					<img src="https://i.imgur.com/8JIWpnw.jpg" class="img-fluid rounded thumbnail-image">
-				</div>
-				<div class="product-detail-container p-2">
-					<div class="d-flex justify-content-between align-items-center">
-						<h5 class="dress-name">White traditional long dress</h5>
-						<div class="d-flex flex-column mb-2">
-							<span class="new-price">$3.99</span>
+	<div class="col-12 p-0 overflow-hidden d-flex flex-wrap">
+			<!-- featureCol -->
+			@foreach($products as $product)
+			<div class="featureCol px-3 mb-6">
+				<div class="card">
+					<div class="image-container">
+						<div class="first">
 						</div>
+						<img src="{{ asset($product->image_name) }}" class="img-fluid rounded thumbnail-image">
 					</div>
-					<div class="d-flex justify-content-between align-items-center pt-1">
-						<div>
-							<span class="rating-number">ONE LINE DESCRIPTION FOR PRODUCT</span>
+					<div class="product-detail-container p-2">
+						<div class="d-flex justify-content-between align-items-center">
+							<h5 class="dress-name">{{ $product->name }}</h5>
+							<div class="d-flex flex-column mb-2">
+								<span class="new-price">${{ $product->price }}</span>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between align-items-center pt-1">
+							<div>
+								<span class="rating-number">{{ $product->short_desc }}</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		@endforeach
-</div>
-
+			@endforeach
+	</div>
 </section>
 <!-- contactListBlock -->
 <div class="contactListBlock container overflow-hidden pt-xl-8 pt-lg-10 pt-md-8 pt-4 pb-xl-12 pb-lg-10 pb-md-4 pb-1">
